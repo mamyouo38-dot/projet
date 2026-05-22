@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arsène Mamy — Marketing Digital & E-commerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --emerald:        #0a5c47;
+      --emerald-lt:     #1f8d6c;
+      --emerald-glow:   #2dd4a5;
+      --emerald-deep:   #053e2f;
+      --gold:           #d4af6a;
+      --gold-lt:        #ecd4a1;
+      --gold-dk:        #a67f3a;
+      --gold-warm:      #c9a558;
+      --ink:            #0a0d0c;
+      --ink-2:          #0f1413;
+      --ink-3:          #141b19;
+      --ink-4:          #1a2320;
+      --line:           rgba(212, 175, 106, 0.08);
+      --line-bright:    rgba(212, 175, 106, 0.2);
+      --ivory:          #f5f1e8;
+      --ivory-dim:      #c9c4b5;
+      --ivory-mid:      #8b8779;
+      --ivory-low:      #4a4a44;
+      --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--sans); background: var(--ink); color: var(--ivory); overflow-x: hidden; font-weight: 300; line-height: 1.6; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--gold-dk), var(--emerald-lt)); border-radius: 3px; }
+    ::selection { background: var(--gold); color: var(--ink); }
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 106, .4); } 50% { box-shadow: 0 0 0 12px rgba(212, 175, 106, 0); } }
+    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.2,.7,.3,1), transform 1s cubic-bezier(.2,.7,.3,1); }
+    .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 1s ease, transform 1s ease; }
+    .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity 1s ease, transform 1s ease; }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+
+    .noise::after {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* HEADER MASTHEAD */
+    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.4rem 0; transition: background .5s, backdrop-filter .5s, padding .35s, border-color .5s; border-bottom: 1px solid transparent; }
+    header.scrolled { background: rgba(10, 13, 12, .92); backdrop-filter: blur(24px); padding: .85rem 0; border-bottom-color: var(--line); }
+    .header-inner { max-width: 1480px; margin: 0 auto; padding: 0 3rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
+    .masthead-left { font-size: .56rem; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; color: var(--ivory-low); }
+    .masthead-center { font-family: var(--serif); font-style: italic; font-size: 1.4rem; font-weight: 500; color: var(--ivory); letter-spacing: .04em; text-align: center; }
+    .masthead-center span { color: var(--gold-lt); }
+    .masthead-right { display: flex; justify-content: flex-end; align-items: center; gap: 1.5rem; }
+    nav a.nav-link { font-size: .62rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--ivory-mid); text-decoration: none; transition: color .3s; }
+    nav a.nav-link:hover { color: var(--gold-lt); }
+
+    /* HERO */
+    #hero { position: relative; min-height: 100svh; background: var(--ink); overflow: hidden; padding-top: 5rem; }
+    .hero-veil { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(45, 212, 165, .08) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 10% 80%, rgba(212, 175, 106, .06) 0%, transparent 65%); }
+
+    .edition-band { position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); font-size: .58rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); }
+    .edition-band span.gold-accent { color: var(--gold); }
+    .edition-band .sep { display: inline-block; width: 6px; height: 1px; background: var(--gold); margin: 0 .8rem; vertical-align: middle; }
+
+    .hero-grid { position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 3.5rem 3rem 4rem; display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; align-items: center; }
+
+    .hero-left { position: relative; }
+
+    .hero-kicker { display: inline-flex; align-items: center; gap: .7rem; font-size: .6rem; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; }
+    .hero-kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--emerald-glow); animation: pulse 2.5s infinite; }
+    .hero-kicker .num { font-family: var(--serif); font-style: italic; font-size: .9rem; color: var(--ivory-dim); font-weight: 400; }
+
+    .hero-title { font-family: var(--serif); font-size: clamp(4rem, 11vw, 10rem); font-weight: 500; line-height: .82; letter-spacing: -.035em; color: var(--ivory); margin-bottom: 1.5rem; }
+    .hero-title .line-1 { display: block; animation: fadeUp 1.1s cubic-bezier(.2,.7,.3,1) both .15s; }
+    .hero-title .line-2 { display: block; font-style: italic; font-weight: 400; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 50%, var(--gold-warm) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-left: 8%; animation: fadeUp 1.1s cubic-bezier(.2,.7,.3,1) both .35s; }
+
+    .hero-deck { max-width: 540px; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.15rem, 1.8vw, 1.55rem); color: var(--ivory-dim); line-height: 1.45; margin-bottom: 3rem; margin-top: 2.5rem; padding-left: 2rem; border-left: 1px solid var(--gold); animation: fadeUp 1.1s ease both .55s; }
+    .hero-deck strong { font-style: normal; color: var(--gold-lt); font-weight: 500; }
+
+    .hero-meta { display: flex; gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem; animation: fadeUp 1.1s ease both .75s; }
+    .hero-meta-item { border-top: 1px solid var(--line-bright); padding-top: .75rem; min-width: 140px; }
+    .hero-meta-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: .4rem; }
+    .hero-meta-value { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--ivory); letter-spacing: .01em; }
+    .hero-meta-value em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 1.1s ease both .95s; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .75rem; padding: 1.05rem 2.4rem; background: linear-gradient(135deg, var(--gold-dk) 0%, var(--gold) 50%, var(--gold-warm) 100%); color: var(--ink); font-weight: 600; font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; border-radius: 1px; box-shadow: 0 10px 32px rgba(212, 175, 106, .22); transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .3), transparent); transform: translateX(-100%); transition: transform .6s; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(212, 175, 106, .35); }
+    .btn-primary:hover::before { transform: translateX(100%); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: .65rem; padding: 1.05rem 2.4rem; border: 1px solid var(--line-bright); color: var(--ivory-dim); font-weight: 500; font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; border-radius: 1px; transition: all .35s; }
+    .btn-ghost:hover { border-color: var(--emerald-glow); color: var(--emerald-glow); background: rgba(45, 212, 165, .04); }
+
+    .hero-right { position: relative; animation: slideInRight 1.2s cubic-bezier(.2,.7,.3,1) both .4s; }
+    .portrait-wrap { position: relative; max-width: 440px; margin: 0 0 0 auto; }
+    .portrait { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; box-shadow: 0 40px 80px rgba(0, 0, 0, .6); }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.04) saturate(.92); }
+    .portrait-placeholder { width: 100%; height: 100%; background: radial-gradient(circle at 50% 35%, rgba(212, 175, 106, .15), transparent 60%), linear-gradient(135deg, var(--ink-3) 0%, var(--emerald-deep) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; position: relative; }
+    .portrait-placeholder .initials { font-family: var(--serif); font-style: italic; font-size: 6.5rem; font-weight: 500; background: linear-gradient(135deg, var(--gold-dk), var(--gold-lt)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .portrait-placeholder .ph-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); }
+
+    .portrait-plaque { position: absolute; top: -1.25rem; left: -1.25rem; background: var(--ink); border: 1px solid var(--gold); padding: 1rem 1.4rem; text-align: center; z-index: 3; }
+    .portrait-plaque .plaque-label { font-size: .52rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: .35rem; }
+    .portrait-plaque .plaque-value { font-family: var(--serif); font-style: italic; font-size: 1.85rem; font-weight: 500; color: var(--gold-lt); line-height: 1; }
+
+    .portrait-caption { position: absolute; bottom: -3rem; left: 0; max-width: 100%; padding-top: 1rem; border-top: 1px solid var(--line-bright); }
+    .portrait-caption .caption-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+    .portrait-caption .caption-text { font-family: var(--serif); font-size: .92rem; color: var(--ivory-dim); line-height: 1.55; font-style: italic; }
+
+    .vertical-text { position: absolute; right: -3.5rem; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: center; font-size: .55rem; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; color: var(--ivory-low); white-space: nowrap; }
+
+    /* TICKER */
+    .ticker-band { position: relative; z-index: 5; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-2); overflow: hidden; padding: 1.1rem 0; }
+    .ticker-track { display: flex; gap: 4rem; white-space: nowrap; animation: tickerScroll 40s linear infinite; width: max-content; }
+    .ticker-item { font-family: var(--serif); font-style: italic; font-size: 1.5rem; font-weight: 500; color: var(--ivory-mid); display: inline-flex; align-items: center; gap: 4rem; }
+    .ticker-item::after { content: '✦'; color: var(--gold); font-size: .9rem; font-style: normal; }
+    .ticker-item.accent { color: var(--gold-lt); }
+
+    /* SECTIONS */
+    section { position: relative; overflow: hidden; }
+    .section-inner { max-width: 1480px; margin: 0 auto; padding: 8rem 3rem; }
+
+    .ed-section-head { display: grid; grid-template-columns: 180px 1fr; gap: 3rem; align-items: end; margin-bottom: 5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
+    .ed-section-num { font-family: var(--serif); font-style: italic; font-size: 5rem; font-weight: 500; color: var(--gold); line-height: 1; letter-spacing: -.04em; }
+    .ed-section-num small { font-size: 1.5rem; vertical-align: super; color: var(--ivory-low); margin-right: .25rem; font-style: normal; }
+    .ed-section-meta { display: flex; flex-direction: column; gap: .85rem; }
+    .ed-section-label { font-size: .58rem; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; color: var(--ivory-low); }
+    .ed-section-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 500; color: var(--ivory); line-height: 1; letter-spacing: -.02em; }
+    .ed-section-title em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+
+    /* ABOUT */
+    #about { background: var(--ink); }
+    .about-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+    .about-aside { position: sticky; top: 7rem; }
+    .about-aside-title { font-family: var(--serif); font-size: 2.2rem; font-weight: 500; color: var(--gold-lt); line-height: 1.1; margin-bottom: 1.5rem; font-style: italic; }
+    .about-aside-list { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); counter-reset: asideNum; }
+    .about-aside-list li { font-size: .82rem; color: var(--ivory-dim); display: flex; align-items: baseline; gap: 1rem; }
+    .about-aside-list li::before { content: counter(asideNum, decimal-leading-zero); counter-increment: asideNum; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; }
+
+    .about-body { position: relative; }
+    .about-body .lede { font-family: var(--serif); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 500; color: var(--ivory); line-height: 1.35; margin-bottom: 2.5rem; letter-spacing: -.005em; }
+    .about-body .lede em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .about-body p { font-size: 1rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.85; margin-bottom: 1.4rem; }
+    .about-body p strong { color: var(--ivory); font-weight: 500; }
+    .about-body .pullquote { margin: 3rem 0; padding: 2rem 0; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--gold-lt); line-height: 1.45; text-align: center; }
+    .about-body .pullquote::before { content: '« '; }
+    .about-body .pullquote::after { content: ' »'; }
+
+    /* PROJECTS */
+    #projets { background: var(--ink-2); }
+    .projects-stack { display: flex; flex-direction: column; gap: 4rem; }
+    .proj-row { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 3rem; align-items: start; padding-bottom: 4rem; border-bottom: 1px solid var(--line); }
+    .proj-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .proj-row:nth-child(even) { grid-template-columns: 1fr 1fr 200px; }
+    .proj-row:nth-child(even) .proj-num-col { order: 3; text-align: left; }
+    .proj-row:nth-child(even) .proj-visual { order: 1; }
+    .proj-row:nth-child(even) .proj-content { order: 2; }
+
+    .proj-num-col { text-align: right; }
+    .proj-num { font-family: var(--serif); font-style: italic; font-size: 4.5rem; font-weight: 500; color: var(--gold); line-height: 1; letter-spacing: -.04em; }
+    .proj-num small { display: block; font-size: .58rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-top: .8rem; font-style: normal; }
+
+    .proj-visual { aspect-ratio: 4/3; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--ink-3) 0%, var(--emerald-deep) 100%); border: 1px solid var(--line); }
+    .proj-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(212, 175, 106, .12), transparent 60%); }
+    .proj-visual .visual-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 7rem; font-weight: 500; color: rgba(212, 175, 106, .15); letter-spacing: -.05em; }
+    .proj-visual .visual-tag { position: absolute; top: 1.25rem; left: 1.25rem; font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); background: rgba(10, 13, 12, .85); padding: .4rem .85rem; border: 1px solid var(--line-bright); }
+    .proj-visual .visual-tag.emerald { color: var(--emerald-glow); border-color: rgba(45, 212, 165, .3); }
+
+    .proj-content { padding-top: .5rem; }
+    .proj-meta-top { display: flex; gap: 1.5rem; font-size: .58rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+    .proj-meta-top .gold-dot { color: var(--gold); }
+    .proj-title-big { font-family: var(--serif); font-size: clamp(1.6rem, 2.4vw, 2.2rem); font-weight: 500; color: var(--ivory); line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -.015em; }
+    .proj-title-big em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .proj-desc-big { font-size: .95rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.8; margin-bottom: 1.5rem; }
+    .proj-desc-big strong { color: var(--gold-lt); font-weight: 500; }
+    .proj-tags-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag { display: inline-block; padding: .35rem .85rem; font-size: .65rem; font-weight: 500; letter-spacing: .08em; border-radius: 1px; }
+    .tag-gold { background: rgba(212, 175, 106, .07); color: var(--gold-lt); border: 1px solid rgba(212, 175, 106, .22); }
+    .tag-emerald { background: rgba(45, 212, 165, .06); color: var(--emerald-glow); border: 1px solid rgba(45, 212, 165, .22); }
+    .tag-ivory { background: rgba(245, 241, 232, .04); color: var(--ivory-dim); border: 1px solid rgba(245, 241, 232, .12); }
+
+    /* EXPERIENCE */
+    #experience { background: var(--ink); }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-row { display: grid; grid-template-columns: 220px 1fr; gap: 4rem; padding: 3rem 0; border-top: 1px solid var(--line); transition: background .4s; }
+    .exp-row:hover { background: linear-gradient(90deg, rgba(212, 175, 106, .015), transparent); }
+    .exp-row:last-child { border-bottom: 1px solid var(--line); }
+
+    .exp-date-block { display: flex; flex-direction: column; gap: .65rem; }
+    .exp-date-main { font-family: var(--serif); font-style: italic; font-size: 1.65rem; font-weight: 500; color: var(--gold-lt); line-height: 1; }
+    .exp-date-sub { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-low); }
+    .exp-location { font-size: .8rem; color: var(--ivory-mid); font-style: italic; margin-top: .5rem; }
+
+    .exp-content { max-width: 700px; }
+    .exp-role-big { font-family: var(--serif); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 500; color: var(--ivory); line-height: 1.2; margin-bottom: .65rem; letter-spacing: -.01em; }
+    .exp-role-big em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .exp-company-line { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .exp-company { font-size: .8rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+    .exp-company-sep { width: 24px; height: 1px; background: var(--gold-dk); }
+    .exp-ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .exp-ul li { font-size: .9rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.7; padding-left: 1.5rem; position: relative; }
+    .exp-ul li::before { content: '—'; position: absolute; left: 0; top: 0; color: var(--emerald-glow); opacity: .75; }
+
+    /* FORMATION */
+    #formation { background: var(--ink-2); }
+    .edu-double { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .edu-block { position: relative; padding-top: 2rem; border-top: 2px solid var(--gold); }
+    .edu-block:nth-child(2) { border-top-color: var(--emerald-glow); }
+    .edu-period { font-size: .6rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .edu-block:nth-child(2) .edu-period { color: var(--emerald-glow); }
+    .edu-degree-big { font-family: var(--serif); font-size: clamp(1.8rem, 2.6vw, 2.5rem); font-weight: 500; color: var(--ivory); line-height: 1.1; margin-bottom: .85rem; letter-spacing: -.015em; }
+    .edu-school-line { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--gold-lt); margin-bottom: 1.75rem; }
+    .edu-desc-text { font-size: .9rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.85; }
+
+    /* COMPÉTENCES */
+    #competences { background: var(--ink); }
+    .comp-index { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
+    .comp-col { position: relative; }
+    .comp-col-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gold); }
+    .comp-col-num { font-family: var(--serif); font-style: italic; font-size: 1.5rem; font-weight: 500; color: var(--gold); line-height: 1; }
+    .comp-col-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--ivory); line-height: 1.2; }
+    .comp-col-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    .comp-col-list li { font-size: .85rem; color: var(--ivory-dim); font-weight: 300; line-height: 1.55; padding-bottom: .65rem; border-bottom: 1px solid var(--line); }
+    .comp-col-list li:last-child { border-bottom: none; }
+
+    /* INTERETS */
+    #interets { background: var(--ink-2); }
+    .trio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .trio-cell { padding: 3rem 2.5rem; border-right: 1px solid var(--line); }
+    .trio-cell:last-child { border-right: none; }
+    .trio-symbol { font-family: var(--serif); font-style: italic; font-size: 3rem; font-weight: 500; color: var(--gold); line-height: 1; margin-bottom: 1.5rem; }
+    .trio-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--ivory); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line-bright); }
+    .trio-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .trio-list li { font-size: .88rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.6; }
+    .trio-list li strong { color: var(--gold-lt); font-weight: 500; font-family: var(--serif); font-style: italic; }
+
+    /* FOOTER */
+    footer { background: var(--ink); border-top: 1px solid var(--gold); position: relative; overflow: hidden; }
+    footer::before { content: 'contact'; position: absolute; font-family: var(--serif); font-style: italic; font-size: 22rem; font-weight: 500; color: rgba(212, 175, 106, .025); bottom: -6rem; left: 50%; transform: translateX(-50%); white-space: nowrap; pointer-events: none; letter-spacing: -.05em; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 7rem 3rem 5rem; text-align: center; position: relative; z-index: 1; }
+    .footer-kicker { display: inline-block; font-size: .6rem; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; padding: .5rem 1.2rem; border: 1px solid var(--gold); }
+    .footer-title { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 500; color: var(--ivory); margin-bottom: 1.5rem; line-height: .95; letter-spacing: -.025em; }
+    .footer-title em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .footer-deck { font-family: var(--serif); font-style: italic; font-size: 1.2rem; font-weight: 400; color: var(--ivory-dim); margin-bottom: 3.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+
+    .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; margin-bottom: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--line-bright); }
+    .contact-item { display: flex; flex-direction: column; align-items: center; gap: .65rem; text-decoration: none; transition: opacity .3s; }
+    .contact-item:hover { opacity: .7; }
+    .contact-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); }
+    .contact-value { font-family: var(--serif); font-size: 1.1rem; color: var(--gold-lt); letter-spacing: .01em; }
+
+    .social-row { display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap; }
+    .social-btn { display: inline-flex; align-items: center; gap: .65rem; padding: .9rem 1.8rem; border: 1px solid var(--line-bright); font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-dim); text-decoration: none; transition: all .35s; }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold-lt); background: rgba(212, 175, 106, .04); }
+    .social-btn svg { width: 14px; height: 14px; }
+    .footer-copy { font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); opacity: .55; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .hero-right { max-width: 380px; margin: 0 auto; }
+      .vertical-text { display: none; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .about-aside { position: static; }
+      .proj-row, .proj-row:nth-child(even) { grid-template-columns: 1fr; gap: 1.75rem; }
+      .proj-row:nth-child(even) .proj-num-col, .proj-row:nth-child(even) .proj-visual, .proj-row:nth-child(even) .proj-content { order: initial; }
+      .proj-num-col { text-align: left; }
+      .exp-row { grid-template-columns: 1fr; gap: 1.5rem; }
+      .comp-index { grid-template-columns: repeat(2, 1fr); }
+      .trio-grid { grid-template-columns: 1fr; }
+      .trio-cell { border-right: none; border-bottom: 1px solid var(--line); }
+      .trio-cell:last-child { border-bottom: none; }
+      .edu-double { grid-template-columns: 1fr; gap: 3rem; }
+      .ed-section-head { grid-template-columns: 1fr; gap: 1rem; }
+      .header-inner { grid-template-columns: 1fr auto; }
+      .masthead-left { display: none; }
+      nav a.nav-link { display: none; }
+    }
+    @media (max-width: 600px) {
+      .section-inner { padding: 5rem 1.5rem; }
+      .header-inner { padding: 0 1.5rem; }
+      .edition-band { padding: 1rem 1.5rem; flex-direction: column; gap: .75rem; text-align: center; }
+      .hero-grid { padding: 2.5rem 1.5rem 3rem; }
+      .hero-meta { gap: 1.5rem; }
+      .ticker-item { font-size: 1.2rem; }
+      .comp-index { grid-template-columns: 1fr; }
+      .contact-row { gap: 2rem; }
+      .portrait-caption { position: static; margin-top: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="site-header">
+    <div class="header-inner">
+      <div class="masthead-left">Folio · MMXXVI</div>
+      <div class="masthead-center">Arsène <span>Mamy</span></div>
+      <nav class="masthead-right">
+        <a href="#about" class="nav-link">Profil</a>
+        <a href="#projets" class="nav-link">Projets</a>
+        <a href="#experience" class="nav-link">Parcours</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="noise">
+    <div class="hero-veil"></div>
+
+    <div class="edition-band">
+      <div>Volume 01 <span class="sep"></span> Édition 2026</div>
+      <div><span class="gold-accent">Folio</span> <span class="sep"></span> Marketing Digital · Commerce · Data</div>
+      <div>Paris <span class="sep"></span> Orléans</div>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-kicker">
+          <span class="dot"></span>
+          <span>Numéro Spécial</span>
+          <span class="num">№ 01</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line-1">Arsène</span>
+          <span class="line-2">Mamy</span>
+        </h1>
+
+        <p class="hero-deck">
+          Master <strong>Marketing Digital</strong> — Paris Panthéon-Assas / EFREI.
+          Stratégies d'acquisition, contenu &amp; performance digitale au service
+          des marques de demain.
+        </p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">Recherche</div>
+            <div class="hero-meta-value"><em>Alternance</em> 2026</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">Rythme</div>
+            <div class="hero-meta-value">3 j. <em>entreprise</em></div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">Lieu</div>
+            <div class="hero-meta-value">Paris · <em>Orléans</em></div>
+          </div>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">
+            Lire l'édition
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#projets" class="btn-ghost">Sommaire</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="portrait-wrap">
+          <div class="portrait-plaque">
+            <div class="plaque-label">Folio</div>
+            <div class="plaque-value">N°01</div>
+          </div>
+
+          <div class="portrait">
+            <!-- Remplacer par : <img src="ARSENE.jpg" alt="Arsène Mamy" /> -->
+            <div class="portrait-placeholder">
+              <span class="initials">AM</span>
+              <span class="ph-label">Ajouter photo</span>
+            </div>
+          </div>
+
+          <div class="portrait-caption">
+            <div class="caption-label">Portrait</div>
+            <div class="caption-text">
+              « Étudiant en Master Marketing Digital, passionné par l'acquisition et la performance. »
+            </div>
+          </div>
+
+          <div class="vertical-text">Édition 2026 — Folio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker-band">
+      <div class="ticker-track">
+        <span class="ticker-item">Marketing Digital</span>
+        <span class="ticker-item accent">Content Marketing</span>
+        <span class="ticker-item">E-commerce</span>
+        <span class="ticker-item accent">Data &amp; Analytics</span>
+        <span class="ticker-item">SEO</span>
+        <span class="ticker-item accent">Social Media</span>
+        <span class="ticker-item">Python · Excel</span>
+        <span class="ticker-item accent">Acquisition</span>
+        <span class="ticker-item">Marketing Digital</span>
+        <span class="ticker-item accent">Content Marketing</span>
+        <span class="ticker-item">E-commerce</span>
+        <span class="ticker-item accent">Data &amp; Analytics</span>
+        <span class="ticker-item">SEO</span>
+        <span class="ticker-item accent">Social Media</span>
+        <span class="ticker-item">Python · Excel</span>
+        <span class="ticker-item accent">Acquisition</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="ed-section-head reveal">
+        <div class="ed-section-num"><small>№</small>01</div>
+        <div class="ed-section-meta">
+          <div class="ed-section-label">À propos · Profil</div>
+          <h2 class="ed-section-title">Marketing, <em>data</em><br>&amp; performance.</h2>
+        </div>
+      </div>
+
+      <div class="about-layout">
+        <aside class="about-aside reveal-left">
+          <div class="about-aside-title">L'essentiel<br>en un coup d'œil.</div>
+          <ul class="about-aside-list">
+            <li>Master Marketing Digital — Paris Panthéon-Assas / EFREI</li>
+            <li>Licence Économie &amp; Gestion — Université d'Orléans</li>
+            <li>5+ années d'expérience commerciale &amp; relation client</li>
+            <li>Maîtrise data : Python, Excel avancé, Google Analytics</li>
+            <li>Recherche d'alternance — Rentrée 2026, rythme 3j/2j</li>
+          </ul>
+        </aside>
+
+        <div class="about-body reveal-right">
+          <p class="lede">
+            Étudiant en Master Marketing Digital orienté Commerce &amp; Digital,
+            je conjugue <em>analyse économique</em>, <em>data</em> et expérience terrain
+            de la relation client.
+          </p>
+          <p>
+            Mon parcours s'est construit entre deux mondes : la rigueur statistique
+            héritée de ma <strong>Licence Économie &amp; Gestion</strong> à l'Université d'Orléans
+            (régressions, ratios, Excel avancé, Python) et l'agilité du terrain,
+            forgée par mes expériences en grande distribution chez LIDL et Castorama.
+          </p>
+          <p>
+            Passionné par les <strong>stratégies d'acquisition</strong>, le marketing de contenu
+            et la performance digitale, je cherche à contribuer à la croissance d'une marque
+            en développant des campagnes à impact <strong>mesurable</strong>.
+          </p>
+          <div class="pullquote">
+            Allier la rigueur de la data à la sensibilité du contenu pour bâtir des marques mémorables.
+          </div>
+          <p>
+            Je rejoins le Master <strong>Paris Panthéon-Assas / EFREI</strong> à la rentrée 2026
+            pour approfondir mon expertise en CRM, business intelligence et marketing stratégique
+            — et je cherche dès maintenant l'alternance qui me permettra de transformer cette
+            ambition en résultats concrets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="section-inner">
+      <div class="ed-section-head reveal">
+        <div class="ed-section-num"><small>№</small>02</div>
+        <div class="ed-section-meta">
+          <div class="ed-section-label">Projets &amp; Réalisations · Portfolio</div>
+          <h2 class="ed-section-title">Travaux <em>sélectionnés</em>.</h2>
+        </div>
+      </div>
+
+      <div class="projects-stack">
+
+        <article class="proj-row reveal">
+          <div class="proj-num-col">
+            <div class="proj-num">01<small>Étude de marché</small></div>
+          </div>
+          <div class="proj-visual">
+            <span class="visual-tag">Stratégie</span>
+            <div class="visual-icon">D2C</div>
+          </div>
+          <div class="proj-content">
+            <div class="proj-meta-top">
+              <span class="gold-dot">●</span>
+              <span>Projet académique</span>
+              <span>·</span>
+              <span>2026</span>
+            </div>
+            <h3 class="proj-title-big">Positionnement —<br><em>Marque cosmétique D2C</em></h3>
+            <p class="proj-desc-big">
+              Analyse concurrentielle de <strong>10 marques</strong> (DTC &amp; retail), segmentation
+              clients via Python (pandas) et recommandations stratégiques. Plan de communication
+              digital construit sur 6 mois avec objectifs mesurables.
+            </p>
+            <div class="proj-tags-row">
+              <span class="tag tag-gold">Veille concurrentielle</span>
+              <span class="tag tag-emerald">Python · pandas</span>
+              <span class="tag tag-ivory">Stratégie de marque</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-row reveal">
+          <div class="proj-num-col">
+            <div class="proj-num">02<small>Social Media</small></div>
+          </div>
+          <div class="proj-visual">
+            <span class="visual-tag">+65% Engagement</span>
+            <div class="visual-icon" style="font-size: 5rem">Beauty</div>
+          </div>
+          <div class="proj-content">
+            <div class="proj-meta-top">
+              <span class="gold-dot">●</span>
+              <span>Projet professionnel</span>
+              <span>·</span>
+              <span>2022</span>
+            </div>
+            <h3 class="proj-title-big">Campagne Social Media —<br><em>Beauty Abidjan</em></h3>
+            <p class="proj-desc-big">
+              Refonte complète de la ligne éditoriale Instagram &amp; WhatsApp Business :
+              <strong>+65% d'engagement en 3 mois</strong>, calendrier de contenus hebdomadaire,
+              stories produits convertissant directement en visites boutique.
+            </p>
+            <div class="proj-tags-row">
+              <span class="tag tag-gold">Instagram</span>
+              <span class="tag tag-gold">Content marketing</span>
+              <span class="tag tag-ivory">Community management</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-row reveal">
+          <div class="proj-num-col">
+            <div class="proj-num">03<small>Data &amp; KPI</small></div>
+          </div>
+          <div class="proj-visual">
+            <span class="visual-tag emerald">Python · Excel</span>
+            <div class="visual-icon">KPI</div>
+          </div>
+          <div class="proj-content">
+            <div class="proj-meta-top">
+              <span class="gold-dot">●</span>
+              <span>Projet personnel</span>
+              <span>·</span>
+              <span>2025</span>
+            </div>
+            <h3 class="proj-title-big">Dashboard <em>de suivi des ventes</em><br>&amp; KPIs e-commerce</h3>
+            <p class="proj-desc-big">
+              Construction d'un tableau de bord <strong>Excel / Python</strong> automatisant le
+              suivi du chiffre d'affaires, du panier moyen et du taux de conversion à partir
+              de données simulées. Restitution PowerPoint orientée décision.
+            </p>
+            <div class="proj-tags-row">
+              <span class="tag tag-emerald">Python</span>
+              <span class="tag tag-emerald">Excel avancé</span>
+              <span class="tag tag-gold">KPI &amp; Reporting</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-row reveal">
+          <div class="proj-num-col">
+            <div class="proj-num">04<small>SEO &amp; Lead gen</small></div>
+          </div>
+          <div class="proj-visual">
+            <span class="visual-tag">SEO on-page</span>
+            <div class="visual-icon" style="font-size: 5rem">Site</div>
+          </div>
+          <div class="proj-content">
+            <div class="proj-meta-top">
+              <span class="gold-dot">●</span>
+              <span>Projet personnel</span>
+              <span>·</span>
+              <span>2025</span>
+            </div>
+            <h3 class="proj-title-big">Mini-site vitrine —<br><em>Tunnel de conversion</em></h3>
+            <p class="proj-desc-big">
+              Création d'un site vitrine pour une marque fictive avec
+              <strong>optimisation SEO on-page</strong> (balises, mots-clés, structure Hn)
+              et conception d'un tunnel de conversion avec formulaire de lead generation.
+            </p>
+            <div class="proj-tags-row">
+              <span class="tag tag-gold">SEO</span>
+              <span class="tag tag-emerald">Lead generation</span>
+              <span class="tag tag-ivory">UX design</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-inner">
+      <div class="ed-section-head reveal">
+        <div class="ed-section-num"><small>№</small>03</div>
+        <div class="ed-section-meta">
+          <div class="ed-section-label">Expériences professionnelles · Parcours</div>
+          <h2 class="ed-section-title">Sur le <em>terrain</em>.</h2>
+        </div>
+      </div>
+
+      <div class="exp-list">
+
+        <article class="exp-row reveal">
+          <div class="exp-date-block">
+            <div class="exp-date-main">Août 2025</div>
+            <div class="exp-date-sub">— Présent</div>
+            <div class="exp-location">Orléans, France</div>
+          </div>
+          <div class="exp-content">
+            <h3 class="exp-role-big">Équipier Polyvalent — <em>Relation Client</em></h3>
+            <div class="exp-company-line">
+              <span class="exp-company-sep"></span>
+              <span class="exp-company">LIDL · Orléans</span>
+            </div>
+            <ul class="exp-ul">
+              <li>Garantir un accueil de qualité et une expérience client optimale.</li>
+              <li>Gestion des flux produits et disponibilité des articles en rayon.</li>
+              <li>Encaissement fiable et gestion des périodes de forte affluence.</li>
+              <li>Travail en équipe dans un environnement exigeant avec objectifs quotidiens.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp-row reveal">
+          <div class="exp-date-block">
+            <div class="exp-date-main">2025</div>
+            <div class="exp-date-sub">Conseiller vendeur</div>
+            <div class="exp-location">Orléans, France</div>
+          </div>
+          <div class="exp-content">
+            <h3 class="exp-role-big">Conseiller Vendeur — <em>Développement des ventes</em></h3>
+            <div class="exp-company-line">
+              <span class="exp-company-sep"></span>
+              <span class="exp-company">Castorama · Orléans</span>
+            </div>
+            <ul class="exp-ul">
+              <li>Accueil, conseil et accompagnement personnalisé des clients.</li>
+              <li>Identification des besoins et proposition de solutions adaptées.</li>
+              <li>Contribution à l'atteinte des objectifs commerciaux.</li>
+              <li>Fidélisation de la clientèle et gestion des réclamations.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp-row reveal">
+          <div class="exp-date-block">
+            <div class="exp-date-main">2018 — 2023</div>
+            <div class="exp-date-sub">Communication</div>
+            <div class="exp-location">Abidjan, Côte d'Ivoire</div>
+          </div>
+          <div class="exp-content">
+            <h3 class="exp-role-big">Assistante Commerciale &amp; <em>Responsable Communication</em></h3>
+            <div class="exp-company-line">
+              <span class="exp-company-sep"></span>
+              <span class="exp-company">Beauty Abidjan</span>
+            </div>
+            <ul class="exp-ul">
+              <li>Animation des réseaux sociaux de la boutique (Instagram, WhatsApp Business).</li>
+              <li>Mise en place d'actions promotionnelles locales afin de stimuler le trafic et fidéliser la clientèle.</li>
+              <li>Analyse des préférences clients et remontée d'insights consommateurs.</li>
+              <li>Gestion de l'expérience client en point de vente : accueil, conseil et personnalisation de l'offre.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATION -->
+  <section id="formation">
+    <div class="section-inner">
+      <div class="ed-section-head reveal">
+        <div class="ed-section-num"><small>№</small>04</div>
+        <div class="ed-section-meta">
+          <div class="ed-section-label">Formation · Parcours académique</div>
+          <h2 class="ed-section-title">Apprendre, <em>analyser</em>.</h2>
+        </div>
+      </div>
+
+      <div class="edu-double">
+
+        <article class="edu-block reveal">
+          <div class="edu-period">2026 — 2028</div>
+          <h3 class="edu-degree-big">Master Marketing Digital</h3>
+          <div class="edu-school-line">Paris Panthéon-Assas / EFREI</div>
+          <p class="edu-desc-text">
+            Ingénierie commerciale · Négociation B2B complexe · Stratégie grands comptes ·
+            CRM · Marketing stratégique · Business intelligence · Conduite du changement.
+          </p>
+        </article>
+
+        <article class="edu-block reveal">
+          <div class="edu-period">Depuis 2026</div>
+          <h3 class="edu-degree-big">Licence 3 Économie &amp; Gestion</h3>
+          <div class="edu-school-line">Université d'Orléans</div>
+          <p class="edu-desc-text">
+            Analyses statistiques et financières · Régressions · Ratios économiques ·
+            Excel avancé et Python pour l'analyse de données.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section id="competences">
+    <div class="section-inner">
+      <div class="ed-section-head reveal">
+        <div class="ed-section-num"><small>№</small>05</div>
+        <div class="ed-section-meta">
+          <div class="ed-section-label">Compétences · Index</div>
+          <h2 class="ed-section-title">Savoir-faire <em>&amp; outils</em>.</h2>
+        </div>
+      </div>
+
+      <div class="comp-index">
+
+        <div class="comp-col reveal" style="transition-delay: .05s">
+          <div class="comp-col-header">
+            <span class="comp-col-num">i.</span>
+            <span class="comp-col-name">Marketing<br>Digital</span>
+          </div>
+          <ul class="comp-col-list">
+            <li>Community Management</li>
+            <li>Content Marketing</li>
+            <li>E-mailing</li>
+            <li>SEO (notions)</li>
+            <li>Social Media Ads</li>
+          </ul>
+        </div>
+
+        <div class="comp-col reveal" style="transition-delay: .12s">
+          <div class="comp-col-header">
+            <span class="comp-col-num">ii.</span>
+            <span class="comp-col-name">E-commerce<br>&amp; Conversion</span>
+          </div>
+          <ul class="comp-col-list">
+            <li>Gestion boutique en ligne</li>
+            <li>Fiches produits</li>
+            <li>Lead generation</li>
+            <li>Suivi des conversions</li>
+          </ul>
+        </div>
+
+        <div class="comp-col reveal" style="transition-delay: .19s">
+          <div class="comp-col-header">
+            <span class="comp-col-num">iii.</span>
+            <span class="comp-col-name">Analyse<br>&amp; Data</span>
+          </div>
+          <ul class="comp-col-list">
+            <li>Excel avancé</li>
+            <li>Python</li>
+            <li>KPI &amp; Reporting</li>
+            <li>PowerPoint</li>
+            <li>Google Analytics</li>
+            <li>Shopify · Canva · Photoshop</li>
+          </ul>
+        </div>
+
+        <div class="comp-col reveal" style="transition-delay: .26s">
+          <div class="comp-col-header">
+            <span class="comp-col-num">iv.</span>
+            <span class="comp-col-name">Soft<br>Skills</span>
+          </div>
+          <ul class="comp-col-list">
+            <li>Communication</li>
+            <li>Adaptabilité</li>
+            <li>Résilience</li>
+            <li>Organisation</li>
+            <li>Esprit d'équipe</li>
+            <li>Force de proposition</li>
+            <li>Rigueur</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERETS -->
+  <section id="interets">
+    <div class="section-inner">
+      <div class="ed-section-head reveal">
+        <div class="ed-section-num"><small>№</small>06</div>
+        <div class="ed-section-meta">
+          <div class="ed-section-label">Langues &amp; Centres d'intérêt</div>
+          <h2 class="ed-section-title">Au-delà du <em>professionnel</em>.</h2>
+        </div>
+      </div>
+
+      <div class="trio-grid reveal">
+
+        <div class="trio-cell">
+          <div class="trio-symbol">i.</div>
+          <h3 class="trio-title">Langues</h3>
+          <ul class="trio-list">
+            <li><strong>Français</strong> — Courant</li>
+            <li><strong>Anglais</strong> — Opérationnel</li>
+          </ul>
+        </div>
+
+        <div class="trio-cell">
+          <div class="trio-symbol">ii.</div>
+          <h3 class="trio-title">Centres d'intérêt</h3>
+          <ul class="trio-list">
+            <li>Sport &amp; <strong>Musculation</strong></li>
+            <li>Développement personnel</li>
+            <li>Podcasts <strong>business</strong></li>
+          </ul>
+        </div>
+
+        <div class="trio-cell">
+          <div class="trio-symbol">iii.</div>
+          <h3 class="trio-title">Veille</h3>
+          <ul class="trio-list">
+            <li>Stratégies d'<strong>acquisition</strong></li>
+            <li>Marques D2C &amp; e-commerce</li>
+            <li>Tendances <strong>marketing digital</strong></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTACT -->
+  <footer id="contact">
+    <div class="footer-inner reveal">
+      <span class="footer-kicker">Édition limitée · Disponible 2026</span>
+      <h1 class="footer-title">Une alternance,<br>un <em>projet</em>,<br>une opportunité ?</h1>
+      <p class="footer-deck">
+        Disponible pour une alternance à partir de 2026<br>
+        — rythme 3 jours entreprise / 2 jours école —
+      </p>
+
+      <div class="contact-row">
+        <a href="mailto:arsenemamy2004@gmail.com" class="contact-item">
+          <div class="contact-label">E-mail</div>
+          <div class="contact-value">arsenemamy2004@gmail.com</div>
+        </a>
+        <a href="tel:+33757171296" class="contact-item">
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value">07 57 17 12 96</div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-label">Localisation</div>
+          <div class="contact-value">Orléans / Paris</div>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/ouo-arsene" target="_blank" rel="noopener" class="social-btn">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:arsenemamy2004@gmail.com" class="social-btn">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Écrire un e-mail
+        </a>
+      </div>
+
+      <p class="footer-copy">© 2026 Folio — Arsène Mamy · Édition limitée · Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script>
+    const hdr = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      hdr.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .12 });
+    els.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
