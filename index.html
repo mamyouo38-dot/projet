@@ -145,7 +145,7 @@
     #about { background: var(--ink); }
     .about-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
     .about-aside { position: sticky; top: 7rem; }
-    .about-aside-title { font-family: var(--serif); font-size: 2.2rem; font-weight: 500; color: var(--gold-lt); line-height: 1.1; margin-bottom: 1.5rem; font-style: italic; }
+    .about-aside-title { font-family: var(--serif); font-style: italic; font-size: 2.2rem; font-weight: 500; color: var(--gold-lt); line-height: 1.1; margin-bottom: 1.5rem; }
     .about-aside-list { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); counter-reset: asideNum; }
     .about-aside-list li { font-size: .82rem; color: var(--ivory-dim); display: flex; align-items: baseline; gap: 1rem; }
     .about-aside-list li::before { content: counter(asideNum, decimal-leading-zero); counter-increment: asideNum; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; }
@@ -317,7 +317,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section id="hero" class="noise">
     <div class="hero-veil"></div>
 
@@ -378,11 +377,7 @@
           </div>
 
           <div class="portrait">
-            <!-- Remplacer par : <img src="ARSENE.jpg" alt="Arsène Mamy" /> -->
-            <div class="portrait-placeholder">
-              <span class="initials">AM</span>
-              <span class="ph-label">Ajouter photo</span>
-            </div>
+            <img src="photo_mamy.jpg" alt="Arsène Mamy" />
           </div>
 
           <div class="portrait-caption">
@@ -419,7 +414,6 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
       <div class="ed-section-head reveal">
@@ -473,7 +467,6 @@
     </div>
   </section>
 
-  <!-- PROJETS -->
   <section id="projets">
     <div class="section-inner">
       <div class="ed-section-head reveal">
@@ -606,7 +599,6 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-inner">
       <div class="ed-section-head reveal">
@@ -686,7 +678,6 @@
     </div>
   </section>
 
-  <!-- FORMATION -->
   <section id="formation">
     <div class="section-inner">
       <div class="ed-section-head reveal">
@@ -723,7 +714,6 @@
     </div>
   </section>
 
-  <!-- COMPÉTENCES -->
   <section id="competences">
     <div class="section-inner">
       <div class="ed-section-head reveal">
@@ -798,7 +788,6 @@
     </div>
   </section>
 
-  <!-- INTERETS -->
   <section id="interets">
     <div class="section-inner">
       <div class="ed-section-head reveal">
@@ -844,7 +833,6 @@
     </div>
   </section>
 
-  <!-- FOOTER / CONTACT -->
   <footer id="contact">
     <div class="footer-inner reveal">
       <span class="footer-kicker">Édition limitée · Disponible 2026</span>
