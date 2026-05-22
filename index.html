@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arsène Mamy — Marketing Digital & E-commerce</title>
+  <title>Arsène Mamy — Édition №01 · Marketing Digital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,581 +13,1218 @@
       --emerald-lt:     #1f8d6c;
       --emerald-glow:   #2dd4a5;
       --emerald-deep:   #053e2f;
+
       --gold:           #d4af6a;
       --gold-lt:        #ecd4a1;
       --gold-dk:        #a67f3a;
       --gold-warm:      #c9a558;
+
       --ink:            #0a0d0c;
       --ink-2:          #0f1413;
       --ink-3:          #141b19;
       --ink-4:          #1a2320;
-      --line:           rgba(212, 175, 106, 0.08);
-      --line-bright:    rgba(212, 175, 106, 0.2);
+      --line:           rgba(212, 175, 106, 0.10);
+      --line-bright:    rgba(212, 175, 106, 0.22);
+
       --ivory:          #f5f1e8;
       --ivory-dim:      #c9c4b5;
       --ivory-mid:      #8b8779;
       --ivory-low:      #4a4a44;
+
       --serif: 'Cormorant Garamond', 'Times New Roman', serif;
       --sans:  'Inter', system-ui, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--sans); background: var(--ink); color: var(--ivory); overflow-x: hidden; font-weight: 300; line-height: 1.6; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--ivory);
+      overflow-x: hidden;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--ink); }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--gold-dk), var(--emerald-lt)); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--emerald-lt), var(--gold-dk));
+      border-radius: 3px;
+    }
     ::selection { background: var(--gold); color: var(--ink); }
+
     h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
+    .label {
+      font-family: var(--sans);
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+    }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
-    @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
-    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 106, .4); } 50% { box-shadow: 0 0 0 12px rgba(212, 175, 106, 0); } }
-    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* ANIM */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px);} to { opacity:1; transform:none;} }
+    @keyframes fadeRight { from { opacity:0; transform:translateX(-30px);} to { opacity:1; transform:none;} }
+    @keyframes slideIn { from { opacity:0; transform:translateY(50px);} to { opacity:1; transform:none;} }
+    @keyframes shimmerLine {
+      0% { transform: scaleX(0); transform-origin: left; }
+      100% { transform: scaleX(1); transform-origin: left; }
+    }
 
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.2,.7,.3,1), transform 1s cubic-bezier(.2,.7,.3,1); }
-    .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 1s ease, transform 1s ease; }
-    .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity 1s ease, transform 1s ease; }
-    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+    .reveal { opacity:0; transform:translateY(30px); transition: opacity 1s cubic-bezier(.2,.7,.3,1), transform 1s cubic-bezier(.2,.7,.3,1); }
+    .reveal.visible { opacity:1; transform:none; }
 
+    /* Noise */
     .noise::after {
-      content: ''; position: absolute; inset: 0; z-index: 1;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
-      pointer-events: none;
+      content:''; position:absolute; inset:0; z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events:none;
     }
 
-    /* HEADER MASTHEAD */
-    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 1.4rem 0; transition: background .5s, backdrop-filter .5s, padding .35s, border-color .5s; border-bottom: 1px solid transparent; }
-    header.scrolled { background: rgba(10, 13, 12, .92); backdrop-filter: blur(24px); padding: .85rem 0; border-bottom-color: var(--line); }
-    .header-inner { max-width: 1480px; margin: 0 auto; padding: 0 3rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
-    .masthead-left { font-size: .56rem; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; color: var(--ivory-low); }
-    .masthead-center { font-family: var(--serif); font-style: italic; font-size: 1.4rem; font-weight: 500; color: var(--ivory); letter-spacing: .04em; text-align: center; }
-    .masthead-center span { color: var(--gold-lt); }
-    .masthead-right { display: flex; justify-content: flex-end; align-items: center; gap: 1.5rem; }
-    nav a.nav-link { font-size: .62rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--ivory-mid); text-decoration: none; transition: color .3s; }
-    nav a.nav-link:hover { color: var(--gold-lt); }
+    /* ════════════════════════════════════════════════
+       MAGAZINE HEADER — bandeau éditorial
+       ════════════════════════════════════════════════ */
+    .mag-header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(10, 13, 12, .92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      padding: .9rem 0;
+    }
+    .mag-header-inner {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 3rem;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; gap: 2rem;
+    }
+    .mag-issue {
+      font-family: var(--serif); font-style: italic;
+      font-size: .9rem; color: var(--gold-lt);
+    }
+    .mag-issue span {
+      font-family: var(--sans); font-style: normal;
+      font-size: .6rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--ivory-low);
+      margin-left: .5rem;
+    }
+    .mag-logo {
+      font-family: var(--serif); font-weight: 600;
+      font-size: 1.1rem; color: var(--ivory);
+      letter-spacing: .12em; text-transform: uppercase;
+      text-align: center;
+    }
+    .mag-logo em {
+      font-style: italic; color: var(--gold-lt);
+      font-weight: 500;
+    }
+    .mag-nav {
+      display: flex; justify-content: flex-end; gap: 2rem;
+    }
+    .mag-nav a {
+      font-size: .62rem; font-weight: 500; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--ivory-mid);
+      text-decoration: none; transition: color .3s;
+      position: relative;
+    }
+    .mag-nav a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:1px; background: var(--gold);
+      transition: width .35s;
+    }
+    .mag-nav a:hover { color: var(--gold-lt); }
+    .mag-nav a:hover::after { width: 100%; }
 
-    /* HERO */
-    #hero { position: relative; min-height: 100svh; background: var(--ink); overflow: hidden; padding-top: 5rem; }
-    .hero-veil { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(45, 212, 165, .08) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 10% 80%, rgba(212, 175, 106, .06) 0%, transparent 65%); }
+    /* ════════════════════════════════════════════════
+       HERO ÉDITORIAL — couverture magazine
+       ════════════════════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100svh;
+      background: var(--ink); overflow: hidden;
+      padding-top: 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 100% 0%, rgba(45, 212, 165, .08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 0% 100%, rgba(212, 175, 106, .06) 0%, transparent 60%),
+        var(--ink);
+    }
+    .hero-rule-top, .hero-rule-bot {
+      position: absolute; left: 3rem; right: 3rem; height: 1px;
+      background: var(--line-bright);
+    }
+    .hero-rule-top { top: 6rem; }
+    .hero-rule-bot { bottom: 4rem; }
 
-    .edition-band { position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); font-size: .58rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); }
-    .edition-band span.gold-accent { color: var(--gold); }
-    .edition-band .sep { display: inline-block; width: 6px; height: 1px; background: var(--gold); margin: 0 .8rem; vertical-align: middle; }
+    /* Numéro géant en background */
+    .hero-issue-num {
+      position: absolute; top: 50%; right: -2rem;
+      transform: translateY(-50%);
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(20rem, 40vw, 38rem); font-weight: 400;
+      color: rgba(212, 175, 106, .035);
+      line-height: .8; letter-spacing: -.05em;
+      pointer-events: none; user-select: none; z-index: 0;
+    }
 
-    .hero-grid { position: relative; z-index: 5; max-width: 1480px; margin: 0 auto; padding: 3.5rem 3rem 4rem; display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; align-items: center; }
+    .hero-wrap {
+      position: relative; z-index: 2;
+      max-width: 1400px; margin: 0 auto;
+      padding: 7rem 3rem 4rem;
+      min-height: calc(100svh - 4rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
 
-    .hero-left { position: relative; }
+    /* COL GAUCHE — TITRE ÉDITORIAL */
+    .hero-left {
+      animation: fadeRight 1.2s ease both .2s;
+      position: relative;
+    }
 
-    .hero-kicker { display: inline-flex; align-items: center; gap: .7rem; font-size: .6rem; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; }
-    .hero-kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--emerald-glow); animation: pulse 2.5s infinite; }
-    .hero-kicker .num { font-family: var(--serif); font-style: italic; font-size: .9rem; color: var(--ivory-dim); font-weight: 400; }
+    .hero-kicker {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-kicker-line {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .hero-kicker-text {
+      font-size: .65rem; font-weight: 600; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--gold);
+    }
 
-    .hero-title { font-family: var(--serif); font-size: clamp(4rem, 11vw, 10rem); font-weight: 500; line-height: .82; letter-spacing: -.035em; color: var(--ivory); margin-bottom: 1.5rem; }
-    .hero-title .line-1 { display: block; animation: fadeUp 1.1s cubic-bezier(.2,.7,.3,1) both .15s; }
-    .hero-title .line-2 { display: block; font-style: italic; font-weight: 400; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 50%, var(--gold-warm) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-left: 8%; animation: fadeUp 1.1s cubic-bezier(.2,.7,.3,1) both .35s; }
+    .hero-feature {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--emerald-glow);
+      margin-bottom: 1rem; letter-spacing: .02em;
+    }
 
-    .hero-deck { max-width: 540px; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.15rem, 1.8vw, 1.55rem); color: var(--ivory-dim); line-height: 1.45; margin-bottom: 3rem; margin-top: 2.5rem; padding-left: 2rem; border-left: 1px solid var(--gold); animation: fadeUp 1.1s ease both .55s; }
-    .hero-deck strong { font-style: normal; color: var(--gold-lt); font-weight: 500; }
+    /* Titre principal — typographie magazine massive */
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(4.5rem, 11vw, 11rem);
+      font-weight: 500; line-height: .82;
+      letter-spacing: -.035em;
+      color: var(--ivory);
+      margin-bottom: 0;
+    }
+    .hero-title .l1 { display: block; }
+    .hero-title .l2 {
+      display: block;
+      font-style: italic; font-weight: 400;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 60%, var(--gold-warm) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-left: 2rem;
+    }
 
-    .hero-meta { display: flex; gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem; animation: fadeUp 1.1s ease both .75s; }
-    .hero-meta-item { border-top: 1px solid var(--line-bright); padding-top: .75rem; min-width: 140px; }
-    .hero-meta-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: .4rem; }
-    .hero-meta-value { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--ivory); letter-spacing: .01em; }
-    .hero-meta-value em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .hero-deck {
+      margin-top: 3rem;
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+      font-style: italic;
+      color: var(--ivory-dim);
+      line-height: 1.55;
+      max-width: 38ch;
+      font-weight: 400;
+    }
+    .hero-deck::before {
+      content: '« ';
+      color: var(--gold);
+      font-size: 1.5em;
+      line-height: 0;
+    }
+    .hero-deck::after {
+      content: ' »';
+      color: var(--gold);
+      font-size: 1.5em;
+      line-height: 0;
+    }
 
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 1.1s ease both .95s; }
-    .btn-primary { display: inline-flex; align-items: center; gap: .75rem; padding: 1.05rem 2.4rem; background: linear-gradient(135deg, var(--gold-dk) 0%, var(--gold) 50%, var(--gold-warm) 100%); color: var(--ink); font-weight: 600; font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; border-radius: 1px; box-shadow: 0 10px 32px rgba(212, 175, 106, .22); transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
-    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .3), transparent); transform: translateX(-100%); transition: transform .6s; }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(212, 175, 106, .35); }
-    .btn-primary:hover::before { transform: translateX(100%); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: .65rem; padding: 1.05rem 2.4rem; border: 1px solid var(--line-bright); color: var(--ivory-dim); font-weight: 500; font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; border-radius: 1px; transition: all .35s; }
-    .btn-ghost:hover { border-color: var(--emerald-glow); color: var(--emerald-glow); background: rgba(45, 212, 165, .04); }
+    .hero-byline {
+      margin-top: 2.5rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-byline-block {
+      font-size: .68rem; letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--ivory-mid);
+      font-weight: 500;
+    }
+    .hero-byline-block strong {
+      display: block; color: var(--gold-lt);
+      font-size: .75rem; margin-bottom: .2rem;
+      font-weight: 600;
+    }
+    .hero-byline-sep {
+      width: 1px; height: 30px;
+      background: var(--line-bright);
+    }
 
-    .hero-right { position: relative; animation: slideInRight 1.2s cubic-bezier(.2,.7,.3,1) both .4s; }
-    .portrait-wrap { position: relative; max-width: 440px; margin: 0 0 0 auto; }
-    .portrait { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; box-shadow: 0 40px 80px rgba(0, 0, 0, .6); }
-    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.04) saturate(.92); }
+    /* COL DROITE — VISUEL ÉDITORIAL */
+    .hero-right {
+      position: relative;
+      animation: fadeUp 1.2s ease both .45s;
+      height: min(75svh, 720px);
+    }
 
-    .portrait-plaque { position: absolute; top: -1.25rem; left: -1.25rem; background: var(--ink); border: 1px solid var(--gold); padding: 1rem 1.4rem; text-align: center; z-index: 3; }
-    .portrait-plaque .plaque-label { font-size: .52rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: .35rem; }
-    .portrait-plaque .plaque-value { font-family: var(--serif); font-style: italic; font-size: 1.85rem; font-weight: 500; color: var(--gold-lt); line-height: 1; }
+    .hero-visual {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr auto;
+      gap: 1rem;
+    }
 
-    .portrait-caption { position: absolute; bottom: -3rem; left: 0; max-width: 100%; padding-top: 1rem; border-top: 1px solid var(--line-bright); }
-    .portrait-caption .caption-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
-    .portrait-caption .caption-text { font-family: var(--serif); font-size: .92rem; color: var(--ivory-dim); line-height: 1.55; font-style: italic; }
+    /* PHOTO PRINCIPALE */
+    .hero-photo-main {
+      grid-row: 1 / 3;
+      grid-column: 2;
+      background: linear-gradient(135deg, var(--ink-3), var(--emerald-deep));
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .55);
+    }
+    .hero-photo-main::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(212, 175, 106, .12), transparent 60%);
+      z-index: 1;
+    }
+    .hero-photo-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      filter: contrast(1.05) saturate(.92);
+    }
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; position: relative; z-index: 2;
+    }
+    .photo-placeholder .initials {
+      font-family: var(--serif); font-style: italic;
+      font-size: 7rem; font-weight: 500;
+      background: linear-gradient(135deg, var(--gold-dk), var(--gold-lt));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1;
+    }
+    .photo-placeholder .ph-label {
+      font-size: .58rem; font-weight: 600; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--ivory-low);
+    }
 
-    .vertical-text { position: absolute; right: -3.5rem; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: center; font-size: .55rem; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; color: var(--ivory-low); white-space: nowrap; }
+    /* Coins or sur photo */
+    .hero-photo-main::after {
+      content: ''; position: absolute; top: 18px; left: 18px;
+      width: 40px; height: 40px;
+      border-top: 1.5px solid var(--gold);
+      border-left: 1.5px solid var(--gold);
+      opacity: .8; z-index: 3;
+    }
+    .hero-photo-corner-br {
+      position: absolute; bottom: 18px; right: 18px;
+      width: 40px; height: 40px;
+      border-bottom: 1.5px solid var(--gold);
+      border-right: 1.5px solid var(--gold);
+      opacity: .8; z-index: 3;
+    }
 
-    /* TICKER */
-    .ticker-band { position: relative; z-index: 5; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-2); overflow: hidden; padding: 1.1rem 0; }
-    .ticker-track { display: flex; gap: 4rem; white-space: nowrap; animation: tickerScroll 40s linear infinite; width: max-content; }
-    .ticker-item { font-family: var(--serif); font-style: italic; font-size: 1.5rem; font-weight: 500; color: var(--ivory-mid); display: inline-flex; align-items: center; gap: 4rem; }
-    .ticker-item::after { content: '✦'; color: var(--gold); font-size: .9rem; font-style: normal; }
-    .ticker-item.accent { color: var(--gold-lt); }
+    /* Cards latérales */
+    .hero-card-stat {
+      grid-column: 1;
+      grid-row: 1;
+      background: var(--ink-3);
+      border: 1px solid var(--line-bright);
+      padding: 1.5rem;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      border-radius: 2px;
+      position: relative;
+    }
+    .hero-card-stat .stat-mini-label {
+      font-size: .55rem; font-weight: 600; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hero-card-stat .stat-mini-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 4rem; font-weight: 500;
+      color: var(--ivory); line-height: 1;
+      margin: 1rem 0;
+    }
+    .hero-card-stat .stat-mini-desc {
+      font-size: .72rem; color: var(--ivory-mid);
+      line-height: 1.5;
+    }
 
-    /* SECTIONS */
+    .hero-card-meta {
+      grid-column: 1;
+      grid-row: 2;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-lt) 100%);
+      padding: 1.4rem;
+      border-radius: 2px;
+      color: var(--ivory);
+      position: relative;
+    }
+    .hero-card-meta-label {
+      font-size: .55rem; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold-lt);
+      margin-bottom: .6rem;
+    }
+    .hero-card-meta-text {
+      font-family: var(--serif);
+      font-size: 1.15rem; font-weight: 500;
+      line-height: 1.25;
+    }
+    .hero-card-meta-text em {
+      font-style: italic; color: var(--gold-lt);
+    }
+
+    /* Scroll cue */
+    .hero-scroll {
+      position: absolute; left: 3rem; bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      z-index: 3;
+    }
+    .hero-scroll-line {
+      width: 50px; height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .hero-scroll p {
+      font-size: .55rem; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--gold);
+      opacity: .55;
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTIONS — base éditoriale
+       ════════════════════════════════════════════════ */
     section { position: relative; overflow: hidden; }
-    .section-inner { max-width: 1480px; margin: 0 auto; padding: 8rem 3rem; }
-
-    .ed-section-head { display: grid; grid-template-columns: 180px 1fr; gap: 3rem; align-items: end; margin-bottom: 5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
-    .ed-section-num { font-family: var(--serif); font-style: italic; font-size: 5rem; font-weight: 500; color: var(--gold); line-height: 1; letter-spacing: -.04em; }
-    .ed-section-num small { font-size: 1.5rem; vertical-align: super; color: var(--ivory-low); margin-right: .25rem; font-style: normal; }
-    .ed-section-meta { display: flex; flex-direction: column; gap: .85rem; }
-    .ed-section-label { font-size: .58rem; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; color: var(--ivory-low); }
-    .ed-section-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 500; color: var(--ivory); line-height: 1; letter-spacing: -.02em; }
-    .ed-section-title em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
-
-    /* ABOUT */
-    #about { background: var(--ink); }
-    .about-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
-    .about-aside { position: sticky; top: 7rem; }
-    .about-aside-title { font-family: var(--serif); font-size: 2.2rem; font-weight: 500; color: var(--gold-lt); line-height: 1.1; margin-bottom: 1.5rem; font-style: italic; }
-    .about-aside-list { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); counter-reset: asideNum; }
-    .about-aside-list li { font-size: .82rem; color: var(--ivory-dim); display: flex; align-items: baseline; gap: 1rem; }
-    .about-aside-list li::before { content: counter(asideNum, decimal-leading-zero); counter-increment: asideNum; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; }
-
-    .about-body { position: relative; }
-    .about-body .lede { font-family: var(--serif); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 500; color: var(--ivory); line-height: 1.35; margin-bottom: 2.5rem; letter-spacing: -.005em; }
-    .about-body .lede em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
-    .about-body p { font-size: 1rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.85; margin-bottom: 1.4rem; }
-    .about-body p strong { color: var(--ivory); font-weight: 500; }
-    .about-body .pullquote { margin: 3rem 0; padding: 2rem 0; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--gold-lt); line-height: 1.45; text-align: center; }
-    .about-body .pullquote::before { content: '« '; }
-    .about-body .pullquote::after { content: ' »'; }
-
-    /* PROJECTS */
-    #projets { background: var(--ink-2); }
-    .projects-stack { display: flex; flex-direction: column; gap: 4rem; }
-    .proj-row { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 3rem; align-items: start; padding-bottom: 4rem; border-bottom: 1px solid var(--line); }
-    .proj-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .proj-row:nth-child(even) { grid-template-columns: 1fr 1fr 200px; }
-    .proj-row:nth-child(even) .proj-num-col { order: 3; text-align: left; }
-    .proj-row:nth-child(even) .proj-visual { order: 1; }
-    .proj-row:nth-child(even) .proj-content { order: 2; }
-
-    .proj-num-col { text-align: right; }
-    .proj-num { font-family: var(--serif); font-style: italic; font-size: 4.5rem; font-weight: 500; color: var(--gold); line-height: 1; letter-spacing: -.04em; }
-    .proj-num small { display: block; font-size: .58rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-top: .8rem; font-style: normal; }
-
-    .proj-visual { aspect-ratio: 4/3; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--ink-3) 0%, var(--emerald-deep) 100%); border: 1px solid var(--line); }
-    .proj-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(212, 175, 106, .12), transparent 60%); }
-    .proj-visual .visual-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 7rem; font-weight: 500; color: rgba(212, 175, 106, .15); letter-spacing: -.05em; }
-    .proj-visual .visual-tag { position: absolute; top: 1.25rem; left: 1.25rem; font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); background: rgba(10, 13, 12, .85); padding: .4rem .85rem; border: 1px solid var(--line-bright); }
-    .proj-visual .visual-tag.emerald { color: var(--emerald-glow); border-color: rgba(45, 212, 165, .3); }
-
-    .proj-content { padding-top: .5rem; }
-    .proj-meta-top { display: flex; gap: 1.5rem; font-size: .58rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
-    .proj-meta-top .gold-dot { color: var(--gold); }
-    .proj-title-big { font-family: var(--serif); font-size: clamp(1.6rem, 2.4vw, 2.2rem); font-weight: 500; color: var(--ivory); line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -.015em; }
-    .proj-title-big em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
-    .proj-desc-big { font-size: .95rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.8; margin-bottom: 1.5rem; }
-    .proj-desc-big strong { color: var(--gold-lt); font-weight: 500; }
-    .proj-tags-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .tag { display: inline-block; padding: .35rem .85rem; font-size: .65rem; font-weight: 500; letter-spacing: .08em; border-radius: 1px; }
-    .tag-gold { background: rgba(212, 175, 106, .07); color: var(--gold-lt); border: 1px solid rgba(212, 175, 106, .22); }
-    .tag-emerald { background: rgba(45, 212, 165, .06); color: var(--emerald-glow); border: 1px solid rgba(45, 212, 165, .22); }
-    .tag-ivory { background: rgba(245, 241, 232, .04); color: var(--ivory-dim); border: 1px solid rgba(245, 241, 232, .12); }
-
-    /* EXPERIENCE */
-    #experience { background: var(--ink); }
-    .exp-list { display: flex; flex-direction: column; }
-    .exp-row { display: grid; grid-template-columns: 220px 1fr; gap: 4rem; padding: 3rem 0; border-top: 1px solid var(--line); transition: background .4s; }
-    .exp-row:hover { background: linear-gradient(90deg, rgba(212, 175, 106, .015), transparent); }
-    .exp-row:last-child { border-bottom: 1px solid var(--line); }
-
-    .exp-date-block { display: flex; flex-direction: column; gap: .65rem; }
-    .exp-date-main { font-family: var(--serif); font-style: italic; font-size: 1.65rem; font-weight: 500; color: var(--gold-lt); line-height: 1; }
-    .exp-date-sub { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-low); }
-    .exp-location { font-size: .8rem; color: var(--ivory-mid); font-style: italic; margin-top: .5rem; }
-
-    .exp-content { max-width: 700px; }
-    .exp-role-big { font-family: var(--serif); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 500; color: var(--ivory); line-height: 1.2; margin-bottom: .65rem; letter-spacing: -.01em; }
-    .exp-role-big em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
-    .exp-company-line { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-    .exp-company { font-size: .8rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
-    .exp-company-sep { width: 24px; height: 1px; background: var(--gold-dk); }
-    .exp-ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
-    .exp-ul li { font-size: .9rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.7; padding-left: 1.5rem; position: relative; }
-    .exp-ul li::before { content: '—'; position: absolute; left: 0; top: 0; color: var(--emerald-glow); opacity: .75; }
-
-    /* FORMATION */
-    #formation { background: var(--ink-2); }
-    .edu-double { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .edu-block { position: relative; padding-top: 2rem; border-top: 2px solid var(--gold); }
-    .edu-block:nth-child(2) { border-top-color: var(--emerald-glow); }
-    .edu-period { font-size: .6rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-    .edu-block:nth-child(2) .edu-period { color: var(--emerald-glow); }
-    .edu-degree-big { font-family: var(--serif); font-size: clamp(1.8rem, 2.6vw, 2.5rem); font-weight: 500; color: var(--ivory); line-height: 1.1; margin-bottom: .85rem; letter-spacing: -.015em; }
-    .edu-school-line { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--gold-lt); margin-bottom: 1.75rem; }
-    .edu-desc-text { font-size: .9rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.85; }
-
-    /* COMPÉTENCES */
-    #competences { background: var(--ink); }
-    .comp-index { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
-    .comp-col { position: relative; }
-    .comp-col-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gold); }
-    .comp-col-num { font-family: var(--serif); font-style: italic; font-size: 1.5rem; font-weight: 500; color: var(--gold); line-height: 1; }
-    .comp-col-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--ivory); line-height: 1.2; }
-    .comp-col-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
-    .comp-col-list li { font-size: .85rem; color: var(--ivory-dim); font-weight: 300; line-height: 1.55; padding-bottom: .65rem; border-bottom: 1px solid var(--line); }
-    .comp-col-list li:last-child { border-bottom: none; }
-
-    /* INTERETS */
-    #interets { background: var(--ink-2); }
-    .trio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .trio-cell { padding: 3rem 2.5rem; border-right: 1px solid var(--line); }
-    .trio-cell:last-child { border-right: none; }
-    .trio-symbol { font-family: var(--serif); font-style: italic; font-size: 3rem; font-weight: 500; color: var(--gold); line-height: 1; margin-bottom: 1.5rem; }
-    .trio-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--ivory); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line-bright); }
-    .trio-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
-    .trio-list li { font-size: .88rem; font-weight: 300; color: var(--ivory-dim); line-height: 1.6; }
-    .trio-list li strong { color: var(--gold-lt); font-weight: 500; font-family: var(--serif); font-style: italic; }
-
-    /* FOOTER */
-    footer { background: var(--ink); border-top: 1px solid var(--gold); position: relative; overflow: hidden; }
-    footer::before { content: 'contact'; position: absolute; font-family: var(--serif); font-style: italic; font-size: 22rem; font-weight: 500; color: rgba(212, 175, 106, .025); bottom: -6rem; left: 50%; transform: translateX(-50%); white-space: nowrap; pointer-events: none; letter-spacing: -.05em; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 7rem 3rem 5rem; text-align: center; position: relative; z-index: 1; }
-    .footer-kicker { display: inline-block; font-size: .6rem; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; padding: .5rem 1.2rem; border: 1px solid var(--gold); }
-    .footer-title { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 500; color: var(--ivory); margin-bottom: 1.5rem; line-height: .95; letter-spacing: -.025em; }
-    .footer-title em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
-    .footer-deck { font-family: var(--serif); font-style: italic; font-size: 1.2rem; font-weight: 400; color: var(--ivory-dim); margin-bottom: 3.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
-
-    .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; margin-bottom: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--line-bright); }
-    .contact-item { display: flex; flex-direction: column; align-items: center; gap: .65rem; text-decoration: none; transition: opacity .3s; }
-    .contact-item:hover { opacity: .7; }
-    .contact-label { font-size: .55rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); margin-bottom: .4rem; }
-    .contact-value { font-family: var(--serif); font-size: 1.1rem; color: var(--gold-lt); letter-spacing: .01em; }
-
-    .social-row { display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap; }
-    .social-btn { display: inline-flex; align-items: center; gap: .65rem; padding: .9rem 1.8rem; border: 1px solid var(--line-bright); font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-dim); text-decoration: none; transition: all .35s; }
-    .social-btn:hover { border-color: var(--gold); color: var(--gold-lt); background: rgba(212, 175, 106, .04); }
-    .social-btn svg { width: 14px; height: 14px; }
-    .footer-copy { font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ivory-low); opacity: .55; padding-top: 2.5rem; border-top: 1px solid var(--line); }
-
-    /* RESPONSIVE */
-    @media (max-width: 1100px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 4rem; }
-      .hero-right { max-width: 380px; margin: 0 auto; }
-      .vertical-text { display: none; }
-      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
-      .about-aside { position: static; }
-      .proj-row, .proj-row:nth-child(even) { grid-template-columns: 1fr; gap: 1.75rem; }
-      .proj-row:nth-child(even) .proj-num-col, .proj-row:nth-child(even) .proj-visual, .proj-row:nth-child(even) .proj-content { order: initial; }
-      .proj-num-col { text-align: left; }
-      .exp-row { grid-template-columns: 1fr; gap: 1.5rem; }
-      .comp-index { grid-template-columns: repeat(2, 1fr); }
-      .trio-grid { grid-template-columns: 1fr; }
-      .trio-cell { border-right: none; border-bottom: 1px solid var(--line); }
-      .trio-cell:last-child { border-bottom: none; }
-      .edu-double { grid-template-columns: 1fr; gap: 3rem; }
-      .ed-section-head { grid-template-columns: 1fr; gap: 1rem; }
-      .header-inner { grid-template-columns: 1fr auto; }
-      .masthead-left { display: none; }
-      nav a.nav-link { display: none; }
+    .section-inner {
+      max-width: 1400px; margin: 0 auto;
+      padding: 8rem 3rem;
     }
-    @media (max-width: 600px) {
+
+    /* Header de section style magazine */
+    .mag-section-header {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .mag-section-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 6rem; font-weight: 500;
+      color: var(--gold-lt); line-height: .8;
+      opacity: .9;
+    }
+    .mag-section-title h2 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 500; line-height: .95;
+      color: var(--ivory);
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .mag-section-title h2 em {
+      font-style: italic; color: var(--gold-lt);
+      font-weight: 400;
+    }
+    .mag-section-title .label { color: var(--gold); margin-bottom: 1rem; }
+    .mag-section-title .deck {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.15rem; color: var(--ivory-mid);
+      margin-top: .5rem;
+      max-width: 50ch;
+    }
+
+    /* ════════════════════════════════════════════════
+       ABOUT — layout asymétrique
+       ════════════════════════════════════════════════ */
+    #about { background: var(--ink-2); }
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+    }
+    .about-lead {
+      font-family: var(--serif);
+      font-size: 1.65rem; font-weight: 400;
+      line-height: 1.4; color: var(--ivory);
+      margin-bottom: 2rem;
+      letter-spacing: -.005em;
+    }
+    .about-lead::first-letter {
+      font-family: var(--serif); font-style: italic;
+      font-size: 4.5rem; font-weight: 500;
+      color: var(--gold-lt);
+      float: left; line-height: .85;
+      margin: .35rem .75rem 0 0;
+    }
+    .about-body p {
+      font-size: 1rem; color: var(--ivory-dim);
+      line-height: 1.85; margin-bottom: 1.25rem;
+    }
+    .about-body p strong { color: var(--ivory); font-weight: 500; }
+
+    .about-pullquote {
+      grid-column: 1 / -1;
+      max-width: 60ch; margin: 3rem auto 0;
+      text-align: center; padding: 2.5rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .about-pullquote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.8rem; font-weight: 400;
+      color: var(--gold-lt); line-height: 1.4;
+    }
+    .about-pullquote .attr {
+      font-family: var(--sans); font-style: normal;
+      font-size: .65rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--ivory-low);
+      margin-top: 1.25rem; display: block;
+    }
+
+    .about-sidebar {
+      background: var(--ink-3);
+      border: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      border-radius: 2px;
+      position: sticky; top: 6rem;
+      align-self: start;
+    }
+    .about-sidebar::before {
+      content: ''; display: block;
+      width: 40px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--emerald-glow));
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-title {
+      font-family: var(--serif);
+      font-size: 1.4rem; font-weight: 500;
+      color: var(--ivory); margin-bottom: 1.75rem;
+    }
+    .sidebar-block { margin-bottom: 1.5rem; }
+    .sidebar-block:last-child { margin-bottom: 0; }
+    .sidebar-block-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .85rem; padding-bottom: .5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .tag-group { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .tag {
+      display: inline-block; padding: .3rem .8rem;
+      font-size: .65rem; font-weight: 500;
+      border-radius: 1px;
+    }
+    .tag-gold {
+      background: rgba(212, 175, 106, .07);
+      color: var(--gold-lt);
+      border: 1px solid rgba(212, 175, 106, .2);
+    }
+    .tag-emerald {
+      background: rgba(45, 212, 165, .06);
+      color: var(--emerald-glow);
+      border: 1px solid rgba(45, 212, 165, .18);
+    }
+    .lang-row {
+      display: flex; justify-content: space-between;
+      padding: .55rem 0; border-bottom: 1px solid var(--line);
+    }
+    .lang-row:last-child { border-bottom: none; }
+    .lang-name { font-size: .85rem; color: var(--ivory); }
+    .lang-level {
+      font-size: .6rem; font-weight: 600; letter-spacing: .18em;
+      color: var(--gold); text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════════════════
+       PROJETS — feuilletage éditorial
+       ════════════════════════════════════════════════ */
+    #projets { background: var(--ink); }
+    .projects-edit {
+      display: flex; flex-direction: column;
+      gap: 0;
+    }
+    .proj-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.3fr;
+      gap: 3rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+      transition: background .4s;
+    }
+    .proj-row:hover { background: rgba(212, 175, 106, .015); }
+    .proj-row:last-child { border-bottom: none; }
+    .proj-row.alt {
+      grid-template-columns: 80px 1.3fr 1fr;
+    }
+    .proj-row.alt .proj-meta-col { order: 3; }
+    .proj-row.alt .proj-content-col { order: 2; }
+
+    .proj-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 4rem; font-weight: 500;
+      color: var(--gold-lt); line-height: .85;
+    }
+    .proj-meta-col { padding-top: .75rem; }
+    .proj-cat {
+      display: inline-block;
+      font-size: .58rem; font-weight: 600; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--gold);
+      padding: .35rem .85rem;
+      border: 1px solid var(--line-bright);
+      border-radius: 1px;
+      margin-bottom: 1rem;
+      background: rgba(212, 175, 106, .04);
+    }
+    .proj-date {
+      font-family: var(--serif); font-style: italic;
+      font-size: .95rem; color: var(--ivory-mid);
+      margin-bottom: 1rem;
+    }
+    .proj-tags {
+      display: flex; flex-wrap: wrap; gap: .4rem;
+      margin-top: 1.25rem;
+    }
+    .proj-tag {
+      font-size: .65rem; font-weight: 500;
+      color: var(--ivory-mid);
+      padding: .25rem .7rem;
+      background: rgba(245, 241, 232, .04);
+      border: 1px solid var(--line);
+      border-radius: 1px;
+    }
+
+    .proj-content-col { padding-top: .25rem; }
+    .proj-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 500; color: var(--ivory);
+      line-height: 1.15; margin-bottom: 1.25rem;
+      letter-spacing: -.005em;
+      transition: color .35s;
+    }
+    .proj-row:hover .proj-title { color: var(--gold-lt); }
+    .proj-title em {
+      font-style: italic; color: var(--gold-lt);
+      font-weight: 400;
+    }
+    .proj-desc {
+      font-size: .95rem; color: var(--ivory-dim);
+      line-height: 1.8; font-weight: 300;
+    }
+    .proj-desc strong {
+      color: var(--gold-lt); font-weight: 500;
+    }
+
+    /* ════════════════════════════════════════════════
+       EXPÉRIENCE — timeline éditoriale
+       ════════════════════════════════════════════════ */
+    #experience { background: var(--ink-2); }
+    .exp-list {
+      display: flex; flex-direction: column;
+    }
+    .exp-block {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .exp-block:last-child { border-bottom: none; }
+
+    .exp-meta {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .exp-meta::before {
+      content: ''; position: absolute; left: 0; top: .6rem;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 106, .2);
+    }
+    .exp-period {
+      font-size: .65rem; font-weight: 600; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--gold);
+      line-height: 1.4; margin-bottom: .5rem;
+    }
+    .exp-location {
+      font-family: var(--serif); font-style: italic;
+      font-size: .95rem; color: var(--ivory-mid);
+    }
+
+    .exp-content {
+      padding-top: .25rem;
+    }
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 1.85rem; font-weight: 500;
+      color: var(--ivory); line-height: 1.2;
+      margin-bottom: .35rem;
+      letter-spacing: -.005em;
+    }
+    .exp-role em {
+      font-style: italic; color: var(--gold-lt);
+    }
+    .exp-company {
+      font-size: .8rem; font-weight: 500; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--emerald-glow);
+      margin-bottom: 1.5rem;
+    }
+    .exp-points {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .85rem;
+      max-width: 70ch;
+    }
+    .exp-points li {
+      font-size: .92rem; color: var(--ivory-dim);
+      line-height: 1.7; padding-left: 1.5rem;
+      position: relative; font-weight: 300;
+    }
+    .exp-points li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold); font-weight: 400;
+    }
+
+    /* ════════════════════════════════════════════════
+       FORMATION — fiche éditoriale
+       ════════════════════════════════════════════════ */
+    #formation { background: var(--ink); }
+    .edu-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .edu-card {
+      padding: 3.5rem 3rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: background .4s;
+    }
+    .edu-card:nth-child(2n) { border-right: none; }
+    .edu-card:hover { background: rgba(212, 175, 106, .02); }
+
+    .edu-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 2.5rem; font-weight: 500;
+      color: var(--gold-lt); opacity: .5;
+      margin-bottom: 1.5rem; line-height: 1;
+    }
+    .edu-year {
+      font-size: .6rem; font-weight: 600; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 1.85rem; font-weight: 500;
+      color: var(--ivory); line-height: 1.2;
+      margin-bottom: .5rem;
+      letter-spacing: -.005em;
+    }
+    .edu-school {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--emerald-glow);
+      margin-bottom: 1.5rem;
+    }
+    .edu-desc {
+      font-size: .92rem; color: var(--ivory-dim);
+      line-height: 1.75; font-weight: 300;
+      max-width: 50ch;
+    }
+
+    /* ════════════════════════════════════════════════
+       COMPÉTENCES — 4 col éditoriales
+       ════════════════════════════════════════════════ */
+    #competences { background: var(--ink-2); }
+    .comp-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border-top: 1px solid var(--line);
+    }
+    .comp-col {
+      padding: 2.5rem 1.75rem;
+      border-right: 1px solid var(--line);
+      transition: background .4s;
+    }
+    .comp-col:last-child { border-right: none; }
+    .comp-col:hover { background: rgba(212, 175, 106, .02); }
+
+    .comp-col-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--gold-lt); opacity: .55;
+      margin-bottom: .75rem; line-height: 1;
+    }
+    .comp-col-title {
+      font-family: var(--serif);
+      font-size: 1.3rem; font-weight: 500;
+      color: var(--ivory); margin-bottom: 1.25rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: -.005em;
+    }
+    .comp-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .65rem;
+    }
+    .comp-list li {
+      font-size: .85rem; color: var(--ivory-dim);
+      font-weight: 300; line-height: 1.5;
+      padding-left: 1rem; position: relative;
+    }
+    .comp-list li::before {
+      content: '·'; position: absolute; left: 0; top: -.1rem;
+      color: var(--emerald-glow);
+      font-weight: 700; font-size: 1.3rem; line-height: 1;
+    }
+
+    /* ════════════════════════════════════════════════
+       INTÉRÊTS — bande éditoriale
+       ════════════════════════════════════════════════ */
+    #intérêts { background: var(--ink); }
+    .interests-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .interest-cell {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--line);
+      transition: background .4s;
+    }
+    .interest-cell:last-child { border-right: none; }
+    .interest-cell:hover { background: rgba(45, 212, 165, .03); }
+    .interest-marker {
+      font-family: var(--serif); font-style: italic;
+      font-size: 2rem; color: var(--gold-lt);
+      margin-bottom: 1rem; line-height: 1;
+    }
+    .interest-title {
+      font-family: var(--serif);
+      font-size: 1.4rem; font-weight: 500;
+      color: var(--ivory); margin-bottom: 1.25rem;
+    }
+    .interest-items {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .55rem;
+    }
+    .interest-items li {
+      font-size: .88rem; color: var(--ivory-dim);
+      font-weight: 300; line-height: 1.5;
+    }
+    .interest-items li::before {
+      content: '— '; color: var(--emerald-glow);
+    }
+
+    /* ════════════════════════════════════════════════
+       FOOTER ÉDITORIAL
+       ════════════════════════════════════════════════ */
+    footer {
+      background: var(--ink-2);
+      border-top: 1px solid var(--line-bright);
+      position: relative; overflow: hidden;
+    }
+    footer::before {
+      content: 'fin'; position: absolute;
+      font-family: var(--serif); font-style: italic;
+      font-size: 28rem; font-weight: 400;
+      color: rgba(212, 175, 106, .025);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; line-height: .85;
+      letter-spacing: -.05em;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 7rem 3rem;
+      text-align: center; position: relative; z-index: 1;
+    }
+    .footer-label {
+      font-size: .62rem; font-weight: 600; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .footer-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 500; color: var(--ivory);
+      line-height: .95; margin-bottom: 2rem;
+      letter-spacing: -.02em;
+    }
+    .footer-title em {
+      font-style: italic; color: var(--gold-lt);
+      font-weight: 400;
+    }
+    .footer-deck {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.25rem; color: var(--ivory-mid);
+      margin-bottom: 3.5rem;
+      max-width: 50ch; margin-left: auto; margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .contact-rule {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 3rem;
+    }
+    .contact-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .9rem; color: var(--ivory-dim);
+      text-decoration: none; transition: color .3s;
+      font-weight: 400;
+    }
+    .contact-item:hover { color: var(--gold-lt); }
+    .contact-item svg { width: 17px; height: 17px; opacity: .55; }
+
+    .social-row {
+      display: flex; justify-content: center; gap: 1rem;
+      margin-bottom: 4rem; flex-wrap: wrap;
+    }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .85rem 1.75rem;
+      border: 1px solid var(--line-bright);
+      border-radius: 1px;
+      font-size: .65rem; font-weight: 600; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--ivory-dim);
+      text-decoration: none; transition: all .35s;
+    }
+    .social-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-lt);
+      background: rgba(212, 175, 106, .04);
+      transform: translateY(-2px);
+    }
+    .social-btn svg { width: 14px; height: 14px; }
+
+    .footer-copy {
+      font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--ivory-low); opacity: .5;
+    }
+    .footer-copy::before, .footer-copy::after {
+      content: '◆'; margin: 0 1rem;
+      color: var(--gold); opacity: .5;
+    }
+
+    /* ════════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .hero-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-right { height: 500px; max-width: 500px; margin: 0 auto; width: 100%; }
+      .about-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .about-sidebar { position: static; }
+    }
+    @media (max-width: 800px) {
+      .mag-header-inner { grid-template-columns: 1fr; gap: .5rem; padding: 0 1.5rem; }
+      .mag-issue, .mag-nav { display: none; }
+      .mag-logo { text-align: center; }
       .section-inner { padding: 5rem 1.5rem; }
-      .header-inner { padding: 0 1.5rem; }
-      .edition-band { padding: 1rem 1.5rem; flex-direction: column; gap: .75rem; text-align: center; }
-      .hero-grid { padding: 2.5rem 1.5rem 3rem; }
-      .hero-meta { gap: 1.5rem; }
-      .ticker-item { font-size: 1.2rem; }
-      .comp-index { grid-template-columns: 1fr; }
-      .contact-row { gap: 2rem; }
-      .portrait-caption { position: static; margin-top: 1.5rem; }
+      .mag-section-header { grid-template-columns: 1fr; gap: 1rem; }
+      .mag-section-num { font-size: 4rem; }
+      .hero-wrap { padding: 6rem 1.5rem 3rem; }
+      .hero-title .l2 { padding-left: 1rem; }
+      .proj-row, .proj-row.alt {
+        grid-template-columns: 1fr; gap: 1.5rem;
+      }
+      .proj-row.alt .proj-meta-col,
+      .proj-row.alt .proj-content-col { order: initial; }
+      .proj-num { font-size: 3rem; }
+      .exp-block { grid-template-columns: 1fr; gap: 1.5rem; }
+      .edu-grid, .interests-strip { grid-template-columns: 1fr; }
+      .edu-card, .interest-cell { border-right: none; }
+      .comp-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .comp-col:nth-child(2n) { border-right: none; }
+      .comp-col:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .hero-visual { grid-template-columns: 1fr; grid-template-rows: 300px auto auto; }
+      .hero-photo-main { grid-row: 1; grid-column: 1; min-height: 300px; }
+      .hero-card-stat { grid-row: 2; grid-column: 1; }
+      .hero-card-meta { grid-row: 3; grid-column: 1; }
+      .hero-scroll { display: none; }
+    }
+    @media (max-width: 500px) {
+      .comp-grid-4 { grid-template-columns: 1fr; }
+      .comp-col { border-right: none; border-bottom: 1px solid var(--line); }
+      .comp-col:last-child { border-bottom: none; }
+      .hero-byline { gap: 1rem; }
+      .hero-byline-sep { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <header id="site-header">
-    <div class="header-inner">
-      <div class="masthead-left">Folio · MMXXVI</div>
-      <div class="masthead-center">Arsène <span>Mamy</span></div>
-      <nav class="masthead-right">
-        <a href="#about" class="nav-link">Profil</a>
-        <a href="#projets" class="nav-link">Projets</a>
-        <a href="#experience" class="nav-link">Parcours</a>
-        <a href="#contact" class="nav-link">Contact</a>
+  <!-- HEADER MAGAZINE -->
+  <header class="mag-header">
+    <div class="mag-header-inner">
+      <div class="mag-issue">Édition №01 <span>2026</span></div>
+      <div class="mag-logo">ARSÈNE <em>MAMY</em></div>
+      <nav class="mag-nav">
+        <a href="#about">Profil</a>
+        <a href="#projets">Œuvres</a>
+        <a href="#experience">Parcours</a>
+        <a href="mailto:arsenemamy2004@gmail.com">Contact</a>
       </nav>
     </div>
   </header>
 
+  <!-- HERO ÉDITORIAL -->
   <section id="hero" class="noise">
-    <div class="hero-veil"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-rule-top"></div>
+    <div class="hero-issue-num">01</div>
+    <div class="hero-rule-bot"></div>
 
-    <div class="edition-band">
-      <div>Volume 01 <span class="sep"></span> Édition 2026</div>
-      <div><span class="gold-accent">Folio</span> <span class="sep"></span> Marketing Digital · Commerce · Data</div>
-      <div>Paris <span class="sep"></span> Orléans</div>
-    </div>
+    <div class="hero-wrap">
 
-    <div class="hero-grid">
+      <!-- COL GAUCHE — TITRE ÉDITORIAL -->
       <div class="hero-left">
         <div class="hero-kicker">
-          <span class="dot"></span>
-          <span>Numéro Spécial</span>
-          <span class="num">№ 01</span>
+          <span class="hero-kicker-line"></span>
+          <span class="hero-kicker-text">Featured · Édition 2026</span>
         </div>
 
+        <p class="hero-feature">— Le portrait du mois —</p>
+
         <h1 class="hero-title">
-          <span class="line-1">Arsène</span>
-          <span class="line-2">Mamy</span>
+          <span class="l1">Arsène</span>
+          <span class="l2">Mamy.</span>
         </h1>
 
         <p class="hero-deck">
-          Master <strong>Marketing Digital</strong> — Paris Panthéon-Assas / EFREI.
-          Stratégies d'acquisition, contenu &amp; performance digitale au service
-          des marques de demain.
+          Étudiant en Master Marketing Digital, à la croisée du commerce, du contenu et de la data — passionné par les marques qui se construisent autrement.
         </p>
 
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <div class="hero-meta-label">Recherche</div>
-            <div class="hero-meta-value"><em>Alternance</em> 2026</div>
+        <div class="hero-byline">
+          <div class="hero-byline-block">
+            <strong>Statut</strong>
+            Master 2026 — 2028
           </div>
-          <div class="hero-meta-item">
-            <div class="hero-meta-label">Rythme</div>
-            <div class="hero-meta-value">3 j. <em>entreprise</em></div>
+          <div class="hero-byline-sep"></div>
+          <div class="hero-byline-block">
+            <strong>Disponibilité</strong>
+            Alternance · 3j / 2j
           </div>
-          <div class="hero-meta-item">
-            <div class="hero-meta-label">Lieu</div>
-            <div class="hero-meta-value">Paris · <em>Orléans</em></div>
+          <div class="hero-byline-sep"></div>
+          <div class="hero-byline-block">
+            <strong>Bureau</strong>
+            Orléans · Paris
           </div>
-        </div>
-
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
-            Lire l'édition
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#projets" class="btn-ghost">Sommaire</a>
         </div>
       </div>
 
+      <!-- COL DROITE — VISUEL ÉDITORIAL -->
       <div class="hero-right">
-        <div class="portrait-wrap">
-          <div class="portrait-plaque">
-            <div class="plaque-label">Folio</div>
-            <div class="plaque-value">N°01</div>
+        <div class="hero-visual">
+
+          <!-- STAT mini card -->
+          <div class="hero-card-stat">
+            <div class="stat-mini-label">L'indicateur</div>
+            <div class="stat-mini-num">+65%</div>
+            <div class="stat-mini-desc">d'engagement social media généré sur 3 mois — Beauty Abidjan, 2022.</div>
           </div>
 
-          <div class="portrait">
-            <img src="photo_mamy.png" alt="Arsène Mamy" />
-          </div>
-
-          <div class="portrait-caption">
-            <div class="caption-label">Portrait</div>
-            <div class="caption-text">
-              « Étudiant en Master Marketing Digital, passionné par l'acquisition et la performance. »
+          <!-- META card émeraude -->
+          <div class="hero-card-meta">
+            <div class="hero-card-meta-label">Mission</div>
+            <div class="hero-card-meta-text">
+              Bâtir des campagnes à <em>impact mesurable</em>.
             </div>
           </div>
 
-          <div class="vertical-text">Édition 2026 — Folio</div>
+          <!-- PHOTO PRINCIPALE -->
+          <div class="hero-photo-main">
+            <img src="photo_mamy.jpg" alt="Arsène Mamy"
+                 onerror="this.onerror=null; this.src='photo_mamy.png';" />
+            <span class="hero-photo-corner-br"></span>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <div class="ticker-band">
-      <div class="ticker-track">
-        <span class="ticker-item">Marketing Digital</span>
-        <span class="ticker-item accent">Content Marketing</span>
-        <span class="ticker-item">E-commerce</span>
-        <span class="ticker-item accent">Data &amp; Analytics</span>
-        <span class="ticker-item">SEO</span>
-        <span class="ticker-item accent">Social Media</span>
-        <span class="ticker-item">Python · Excel</span>
-        <span class="ticker-item accent">Acquisition</span>
-        <span class="ticker-item">Marketing Digital</span>
-        <span class="ticker-item accent">Content Marketing</span>
-        <span class="ticker-item">E-commerce</span>
-        <span class="ticker-item accent">Data &amp; Analytics</span>
-        <span class="ticker-item">SEO</span>
-        <span class="ticker-item accent">Social Media</span>
-        <span class="ticker-item">Python · Excel</span>
-        <span class="ticker-item accent">Acquisition</span>
-      </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <p>Tournez la page</p>
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
-      <div class="ed-section-head reveal">
-        <div class="ed-section-num"><small>№</small>01</div>
-        <div class="ed-section-meta">
-          <div class="ed-section-label">À propos · Profil</div>
-          <h2 class="ed-section-title">Marketing, <em>data</em><br>&amp; performance.</h2>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 01</div>
+        <div class="mag-section-title">
+          <p class="label">Profil &amp; Compétences</p>
+          <h2>Le portrait <em>en grand format</em></h2>
+          <p class="deck">Une formation qui mêle l'analyse, la data et le terrain — pour des marques qui veulent de la mesure plutôt que du bruit.</p>
         </div>
-      </div>
+      </header>
 
-      <div class="about-layout">
-        <aside class="about-aside reveal-left">
-          <div class="about-aside-title">L'essentiel<br>en un coup d'œil.</div>
-          <ul class="about-aside-list">
-            <li>Master Marketing Digital — Paris Panthéon-Assas / EFREI</li>
-            <li>Licence Économie &amp; Gestion — Université d'Orléans</li>
-            <li>5+ années d'expérience commerciale &amp; relation client</li>
-            <li>Maîtrise data : Python, Excel avancé, Google Analytics</li>
-            <li>Recherche d'alternance — Rentrée 2026, rythme 3j/2j</li>
-          </ul>
-        </aside>
-
-        <div class="about-body reveal-right">
-          <p class="lede">
-            Étudiant en Master Marketing Digital orienté Commerce &amp; Digital,
-            je conjugue <em>analyse économique</em>, <em>data</em> et expérience terrain
-            de la relation client.
+      <div class="about-wrap">
+        <div class="reveal">
+          <p class="about-lead">
+            Étudiant en Master Marketing Digital orienté Commerce &amp; Digital — Paris Panthéon-Assas / EFREI.
           </p>
-          <p>
-            Mon parcours s'est construit entre deux mondes : la rigueur statistique
-            héritée de ma <strong>Licence Économie &amp; Gestion</strong> à l'Université d'Orléans
-            (régressions, ratios, Excel avancé, Python) et l'agilité du terrain,
-            forgée par mes expériences en grande distribution chez LIDL et Castorama.
-          </p>
-          <p>
-            Passionné par les <strong>stratégies d'acquisition</strong>, le marketing de contenu
-            et la performance digitale, je cherche à contribuer à la croissance d'une marque
-            en développant des campagnes à impact <strong>mesurable</strong>.
-          </p>
-          <div class="pullquote">
-            Allier la rigueur de la data à la sensibilité du contenu pour bâtir des marques mémorables.
-          </div>
-          <p>
-            Je rejoins le Master <strong>Paris Panthéon-Assas / EFREI</strong> à la rentrée 2026
-            pour approfondir mon expertise en CRM, business intelligence et marketing stratégique
-            — et je cherche dès maintenant l'alternance qui me permettra de transformer cette
-            ambition en résultats concrets.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projets">
-    <div class="section-inner">
-      <div class="ed-section-head reveal">
-        <div class="ed-section-num"><small>№</small>02</div>
-        <div class="ed-section-meta">
-          <div class="ed-section-label">Projets &amp; Réalisations · Portfolio</div>
-          <h2 class="ed-section-title">Travaux <em>sélectionnés</em>.</h2>
-        </div>
-      </div>
-
-      <div class="projects-stack">
-
-        <article class="proj-row reveal">
-          <div class="proj-num-col">
-            <div class="proj-num">01<small>Étude de marché</small></div>
-          </div>
-          <div class="proj-visual">
-            <span class="visual-tag">Stratégie</span>
-            <div class="visual-icon">D2C</div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-meta-top">
-              <span class="gold-dot">●</span>
-              <span>Projet académique</span>
-              <span>·</span>
-              <span>2026</span>
-            </div>
-            <h3 class="proj-title-big">Positionnement —<br><em>Marque cosmétique D2C</em></h3>
-            <p class="proj-desc-big">
-              Analyse concurrentielle de <strong>10 marques</strong> (DTC &amp; retail), segmentation
-              clients via Python (pandas) et recommandations stratégiques. Plan de communication
-              digital construit sur 6 mois avec objectifs mesurables.
+          <div class="about-body">
+            <p>
+              <strong>Solide formation en analyse économique et statistique</strong> (Excel, Python, data), enrichie par une expérience terrain de la relation client en grande distribution (LIDL, Castorama) et une responsabilité de communication pour une boutique beauté en Côte d'Ivoire.
             </p>
-            <div class="proj-tags-row">
-              <span class="tag tag-gold">Veille concurrentielle</span>
-              <span class="tag tag-emerald">Python · pandas</span>
-              <span class="tag tag-ivory">Stratégie de marque</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="proj-row reveal">
-          <div class="proj-num-col">
-            <div class="proj-num">02<small>Social Media</small></div>
-          </div>
-          <div class="proj-visual">
-            <span class="visual-tag">+65% Engagement</span>
-            <div class="visual-icon" style="font-size: 5rem">Beauty</div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-meta-top">
-              <span class="gold-dot">●</span>
-              <span>Projet professionnel</span>
-              <span>·</span>
-              <span>2022</span>
-            </div>
-            <h3 class="proj-title-big">Campagne Social Media —<br><em>Beauty Abidjan</em></h3>
-            <p class="proj-desc-big">
-              Refonte complète de la ligne éditoriale Instagram &amp; WhatsApp Business :
-              <strong>+65% d'engagement en 3 mois</strong>, calendrier de contenus hebdomadaire,
-              stories produits convertissant directement en visites boutique.
+            <p>
+              Passionné par les <strong>stratégies d'acquisition</strong>, le <strong>marketing de contenu</strong> et la <strong>performance digitale</strong>, je recherche une alternance en marketing digital ou chef de produit marketing afin de contribuer à la croissance d'une marque et de développer des campagnes à impact mesurable.
             </p>
-            <div class="proj-tags-row">
-              <span class="tag tag-gold">Instagram</span>
+          </div>
+        </div>
+
+        <aside class="about-sidebar reveal">
+          <h3 class="sidebar-title">L'arsenal</h3>
+
+          <div class="sidebar-block">
+            <div class="sidebar-block-label">Cœur de métier</div>
+            <div class="tag-group">
+              <span class="tag tag-gold">Marketing digital</span>
               <span class="tag tag-gold">Content marketing</span>
-              <span class="tag tag-ivory">Community management</span>
+              <span class="tag tag-gold">Social media ads</span>
+              <span class="tag tag-gold">E-commerce</span>
+              <span class="tag tag-gold">SEO</span>
             </div>
           </div>
-        </article>
 
-        <article class="proj-row reveal">
-          <div class="proj-num-col">
-            <div class="proj-num">03<small>Data &amp; KPI</small></div>
-          </div>
-          <div class="proj-visual">
-            <span class="visual-tag emerald">Python · Excel</span>
-            <div class="visual-icon">KPI</div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-meta-top">
-              <span class="gold-dot">●</span>
-              <span>Projet personnel</span>
-              <span>·</span>
-              <span>2025</span>
-            </div>
-            <h3 class="proj-title-big">Dashboard <em>de suivi des ventes</em><br>&amp; KPIs e-commerce</h3>
-            <p class="proj-desc-big">
-              Construction d'un tableau de bord <strong>Excel / Python</strong> automatisant le
-              suivi du chiffre d'affaires, du panier moyen et du taux de conversion à partir
-              de données simulées. Restitution PowerPoint orientée décision.
-            </p>
-            <div class="proj-tags-row">
+          <div class="sidebar-block">
+            <div class="sidebar-block-label">Data &amp; outils</div>
+            <div class="tag-group">
               <span class="tag tag-emerald">Python</span>
               <span class="tag tag-emerald">Excel avancé</span>
-              <span class="tag tag-gold">KPI &amp; Reporting</span>
+              <span class="tag tag-emerald">Google Analytics</span>
+              <span class="tag tag-emerald">Shopify</span>
+              <span class="tag tag-emerald">Canva</span>
+              <span class="tag tag-emerald">Photoshop</span>
+            </div>
+          </div>
+
+          <div class="sidebar-block">
+            <div class="sidebar-block-label">Langues</div>
+            <div class="lang-row"><span class="lang-name">Français</span><span class="lang-level">Courant</span></div>
+            <div class="lang-row"><span class="lang-name">Anglais</span><span class="lang-level">Opérationnel</span></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="about-pullquote reveal">
+        <p>Allier la rigueur de la data à la sensibilité du contenu pour bâtir des marques mémorables.</p>
+        <span class="attr">— Manifeste personnel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="section-inner">
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 02</div>
+        <div class="mag-section-title">
+          <p class="label">Projets &amp; Réalisations</p>
+          <h2>Le portfolio, <em>page après page</em></h2>
+          <p class="deck">Quatre travaux qui racontent une trajectoire — entre stratégie de marque, social media, data et tunnel de conversion.</p>
+        </div>
+      </header>
+
+      <div class="projects-edit">
+
+        <article class="proj-row reveal">
+          <div class="proj-num">01</div>
+          <div class="proj-meta-col">
+            <span class="proj-cat">Étude de marché</span>
+            <p class="proj-date">Projet académique, 2026</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Veille concurrentielle</span>
+              <span class="proj-tag">Python · pandas</span>
+              <span class="proj-tag">Stratégie</span>
+            </div>
+          </div>
+          <div class="proj-content-col">
+            <h3 class="proj-title">Étude de marché &amp; positionnement — Marque cosmétique <em>D2C</em></h3>
+            <p class="proj-desc">
+              Analyse concurrentielle de <strong>10 marques</strong> (DTC &amp; retail), segmentation clients via Python (pandas), recommandations de positionnement et plan de communication digital structuré sur six mois.
+            </p>
+          </div>
+        </article>
+
+        <article class="proj-row alt reveal">
+          <div class="proj-num">02</div>
+          <div class="proj-content-col">
+            <h3 class="proj-title">Campagne <em>Social Media</em> — Beauty Abidjan</h3>
+            <p class="proj-desc">
+              Refonte complète de la ligne éditoriale Instagram &amp; WhatsApp Business : <strong>+65 % d'engagement en 3 mois</strong>, calendrier de contenus hebdomadaire, stories produits convertissant en visites boutique.
+            </p>
+          </div>
+          <div class="proj-meta-col">
+            <span class="proj-cat">Social media</span>
+            <p class="proj-date">Projet professionnel, 2022</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Instagram</span>
+              <span class="proj-tag">Content marketing</span>
+              <span class="proj-tag">Community management</span>
             </div>
           </div>
         </article>
 
         <article class="proj-row reveal">
-          <div class="proj-num-col">
-            <div class="proj-num">04<small>SEO &amp; Lead gen</small></div>
-          </div>
-          <div class="proj-visual">
-            <span class="visual-tag">SEO on-page</span>
-            <div class="visual-icon" style="font-size: 5rem">Site</div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-meta-top">
-              <span class="gold-dot">●</span>
-              <span>Projet personnel</span>
-              <span>·</span>
-              <span>2025</span>
+          <div class="proj-num">03</div>
+          <div class="proj-meta-col">
+            <span class="proj-cat">Data &amp; KPI</span>
+            <p class="proj-date">Projet personnel, 2025</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">Excel avancé</span>
+              <span class="proj-tag">Reporting</span>
             </div>
-            <h3 class="proj-title-big">Mini-site vitrine —<br><em>Tunnel de conversion</em></h3>
-            <p class="proj-desc-big">
-              Création d'un site vitrine pour une marque fictive avec
-              <strong>optimisation SEO on-page</strong> (balises, mots-clés, structure Hn)
-              et conception d'un tunnel de conversion avec formulaire de lead generation.
+          </div>
+          <div class="proj-content-col">
+            <h3 class="proj-title">Dashboard de suivi des <em>ventes &amp; KPIs</em></h3>
+            <p class="proj-desc">
+              Construction d'un tableau de bord <strong>Excel / Python</strong> automatisant le suivi du chiffre d'affaires, du panier moyen et du taux de conversion à partir de données simulées de e-commerce ; restitution PowerPoint orientée décision.
             </p>
-            <div class="proj-tags-row">
-              <span class="tag tag-gold">SEO</span>
-              <span class="tag tag-emerald">Lead generation</span>
-              <span class="tag tag-ivory">UX design</span>
+          </div>
+        </article>
+
+        <article class="proj-row alt reveal">
+          <div class="proj-num">04</div>
+          <div class="proj-content-col">
+            <h3 class="proj-title">Mini-site vitrine &amp; <em>tunnel de conversion</em></h3>
+            <p class="proj-desc">
+              Création d'un site vitrine pour une marque fictive, optimisation <strong>SEO on-page</strong> (balises, mots-clés, structure Hn) et conception d'un tunnel de conversion avec formulaire de lead generation.
+            </p>
+          </div>
+          <div class="proj-meta-col">
+            <span class="proj-cat">SEO &amp; Lead gen</span>
+            <p class="proj-date">Projet personnel, 2025</p>
+            <div class="proj-tags">
+              <span class="proj-tag">SEO on-page</span>
+              <span class="proj-tag">Lead generation</span>
+              <span class="proj-tag">UX</span>
             </div>
           </div>
         </article>
@@ -596,114 +1233,106 @@
     </div>
   </section>
 
+  <!-- EXPÉRIENCE -->
   <section id="experience">
     <div class="section-inner">
-      <div class="ed-section-head reveal">
-        <div class="ed-section-num"><small>№</small>03</div>
-        <div class="ed-section-meta">
-          <div class="ed-section-label">Expériences professionnelles · Parcours</div>
-          <h2 class="ed-section-title">Sur le <em>terrain</em>.</h2>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 03</div>
+        <div class="mag-section-title">
+          <p class="label">Expériences professionnelles</p>
+          <h2>Trois lieux, <em>une école du terrain</em></h2>
+          <p class="deck">De la communication d'une boutique beauté à Abidjan à la grande distribution française — un parcours qui forge le sens du client.</p>
         </div>
-      </div>
+      </header>
 
       <div class="exp-list">
 
-        <article class="exp-row reveal">
-          <div class="exp-date-block">
-            <div class="exp-date-main">Août 2025</div>
-            <div class="exp-date-sub">— Présent</div>
+        <div class="exp-block reveal">
+          <div class="exp-meta">
+            <div class="exp-period">Août 2025 — Présent</div>
             <div class="exp-location">Orléans, France</div>
           </div>
           <div class="exp-content">
-            <h3 class="exp-role-big">Équipier Polyvalent — <em>Relation Client</em></h3>
-            <div class="exp-company-line">
-              <span class="exp-company-sep"></span>
-              <span class="exp-company">LIDL · Orléans</span>
-            </div>
-            <ul class="exp-ul">
-              <li>Garantir un accueil de qualité et une expérience client optimale.</li>
+            <h3 class="exp-role">Équipier Polyvalent — <em>Relation Client &amp; Satisfaction</em></h3>
+            <div class="exp-company">LIDL · Orléans</div>
+            <ul class="exp-points">
+              <li>Garantir un accueil de qualité et une expérience client optimale en point de vente.</li>
               <li>Gestion des flux produits et disponibilité des articles en rayon.</li>
               <li>Encaissement fiable et gestion des périodes de forte affluence.</li>
               <li>Travail en équipe dans un environnement exigeant avec objectifs quotidiens.</li>
             </ul>
           </div>
-        </article>
+        </div>
 
-        <article class="exp-row reveal">
-          <div class="exp-date-block">
-            <div class="exp-date-main">2025</div>
-            <div class="exp-date-sub">Conseiller vendeur</div>
+        <div class="exp-block reveal">
+          <div class="exp-meta">
+            <div class="exp-period">2025</div>
             <div class="exp-location">Orléans, France</div>
           </div>
           <div class="exp-content">
-            <h3 class="exp-role-big">Conseiller Vendeur — <em>Développement des ventes</em></h3>
-            <div class="exp-company-line">
-              <span class="exp-company-sep"></span>
-              <span class="exp-company">Castorama · Orléans</span>
-            </div>
-            <ul class="exp-ul">
-              <li>Accueil, conseil et accompagnement personnalisé des clients.</li>
+            <h3 class="exp-role">Conseiller Vendeur — <em>Développement des Ventes</em></h3>
+            <div class="exp-company">Castorama · Orléans</div>
+            <ul class="exp-points">
+              <li>Accueil, conseil et accompagnement personnalisé des clients en surface de vente.</li>
               <li>Identification des besoins et proposition de solutions adaptées.</li>
-              <li>Contribution à l'atteinte des objectifs commerciaux.</li>
+              <li>Contribution à l'atteinte des objectifs commerciaux par rayon.</li>
               <li>Fidélisation de la clientèle et gestion des réclamations.</li>
             </ul>
           </div>
-        </article>
+        </div>
 
-        <article class="exp-row reveal">
-          <div class="exp-date-block">
-            <div class="exp-date-main">2018 — 2023</div>
-            <div class="exp-date-sub">Communication</div>
+        <div class="exp-block reveal">
+          <div class="exp-meta">
+            <div class="exp-period">2018 — 2023</div>
             <div class="exp-location">Abidjan, Côte d'Ivoire</div>
           </div>
           <div class="exp-content">
-            <h3 class="exp-role-big">Assistante Commerciale &amp; <em>Responsable Communication</em></h3>
-            <div class="exp-company-line">
-              <span class="exp-company-sep"></span>
-              <span class="exp-company">Beauty Abidjan</span>
-            </div>
-            <ul class="exp-ul">
+            <h3 class="exp-role">Assistante Commerciale &amp; <em>Responsable Communication</em></h3>
+            <div class="exp-company">Beauty Abidjan</div>
+            <ul class="exp-points">
               <li>Animation des réseaux sociaux de la boutique (Instagram, WhatsApp Business).</li>
-              <li>Mise en place d'actions promotionnelles locales afin de stimuler le trafic et fidéliser la clientèle.</li>
+              <li>Mise en place d'actions promotionnelles locales pour stimuler le trafic et fidéliser la clientèle.</li>
               <li>Analyse des préférences clients et remontée d'insights consommateurs.</li>
               <li>Gestion de l'expérience client en point de vente : accueil, conseil et personnalisation de l'offre.</li>
             </ul>
           </div>
-        </article>
+        </div>
 
       </div>
     </div>
   </section>
 
+  <!-- FORMATION -->
   <section id="formation">
     <div class="section-inner">
-      <div class="ed-section-head reveal">
-        <div class="ed-section-num"><small>№</small>04</div>
-        <div class="ed-section-meta">
-          <div class="ed-section-label">Formation · Parcours académique</div>
-          <h2 class="ed-section-title">Apprendre, <em>analyser</em>.</h2>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 04</div>
+        <div class="mag-section-title">
+          <p class="label">Formation</p>
+          <h2>Le parcours <em>académique</em></h2>
+          <p class="deck">Deux établissements, deux approches complémentaires — l'analyse économique en socle, le marketing digital en spécialisation.</p>
         </div>
-      </div>
+      </header>
 
-      <div class="edu-double">
+      <div class="edu-grid">
 
-        <article class="edu-block reveal">
-          <div class="edu-period">2026 — 2028</div>
-          <h3 class="edu-degree-big">Master Marketing Digital</h3>
-          <div class="edu-school-line">Paris Panthéon-Assas / EFREI</div>
-          <p class="edu-desc-text">
-            Ingénierie commerciale · Négociation B2B complexe · Stratégie grands comptes ·
-            CRM · Marketing stratégique · Business intelligence · Conduite du changement.
+        <article class="edu-card reveal">
+          <div class="edu-num">i.</div>
+          <div class="edu-year">2026 — 2028</div>
+          <h3 class="edu-degree">Master Marketing Digital</h3>
+          <p class="edu-school">Paris Panthéon-Assas / EFREI</p>
+          <p class="edu-desc">
+            Ingénierie commerciale · Négociation B2B complexe · Stratégie grands comptes · CRM · Marketing stratégique · Business intelligence · Conduite du changement.
           </p>
         </article>
 
-        <article class="edu-block reveal">
-          <div class="edu-period">Depuis 2026</div>
-          <h3 class="edu-degree-big">Licence 3 Économie &amp; Gestion</h3>
-          <div class="edu-school-line">Université d'Orléans</div>
-          <p class="edu-desc-text">
-            Analyses statistiques et financières · Régressions · Ratios économiques ·
-            Excel avancé et Python pour l'analyse de données.
+        <article class="edu-card reveal">
+          <div class="edu-num">ii.</div>
+          <div class="edu-year">Depuis 2026</div>
+          <h3 class="edu-degree">Licence 3 Économie et Gestion</h3>
+          <p class="edu-school">Université d'Orléans</p>
+          <p class="edu-desc">
+            Analyses statistiques et financières · Régressions · Ratios économiques · Excel avancé et Python pour l'analyse de données.
           </p>
         </article>
 
@@ -711,24 +1340,24 @@
     </div>
   </section>
 
+  <!-- COMPÉTENCES -->
   <section id="competences">
     <div class="section-inner">
-      <div class="ed-section-head reveal">
-        <div class="ed-section-num"><small>№</small>05</div>
-        <div class="ed-section-meta">
-          <div class="ed-section-label">Compétences · Index</div>
-          <h2 class="ed-section-title">Savoir-faire <em>&amp; outils</em>.</h2>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 05</div>
+        <div class="mag-section-title">
+          <p class="label">Compétences</p>
+          <h2>L'inventaire <em>du studio</em></h2>
+          <p class="deck">Quatre familles d'outils et de savoir-faire qui dessinent un profil hybride entre marketing, e-commerce et data.</p>
         </div>
-      </div>
+      </header>
 
-      <div class="comp-index">
+      <div class="comp-grid-4">
 
-        <div class="comp-col reveal" style="transition-delay: .05s">
-          <div class="comp-col-header">
-            <span class="comp-col-num">i.</span>
-            <span class="comp-col-name">Marketing<br>Digital</span>
-          </div>
-          <ul class="comp-col-list">
+        <div class="comp-col reveal">
+          <div class="comp-col-num">i.</div>
+          <h3 class="comp-col-title">Marketing digital</h3>
+          <ul class="comp-list">
             <li>Community Management</li>
             <li>Content Marketing</li>
             <li>E-mailing</li>
@@ -737,12 +1366,10 @@
           </ul>
         </div>
 
-        <div class="comp-col reveal" style="transition-delay: .12s">
-          <div class="comp-col-header">
-            <span class="comp-col-num">ii.</span>
-            <span class="comp-col-name">E-commerce<br>&amp; Conversion</span>
-          </div>
-          <ul class="comp-col-list">
+        <div class="comp-col reveal">
+          <div class="comp-col-num">ii.</div>
+          <h3 class="comp-col-title">E-commerce</h3>
+          <ul class="comp-list">
             <li>Gestion boutique en ligne</li>
             <li>Fiches produits</li>
             <li>Lead generation</li>
@@ -750,12 +1377,10 @@
           </ul>
         </div>
 
-        <div class="comp-col reveal" style="transition-delay: .19s">
-          <div class="comp-col-header">
-            <span class="comp-col-num">iii.</span>
-            <span class="comp-col-name">Analyse<br>&amp; Data</span>
-          </div>
-          <ul class="comp-col-list">
+        <div class="comp-col reveal">
+          <div class="comp-col-num">iii.</div>
+          <h3 class="comp-col-title">Analyse &amp; Data</h3>
+          <ul class="comp-list">
             <li>Excel avancé</li>
             <li>Python</li>
             <li>KPI &amp; Reporting</li>
@@ -765,12 +1390,10 @@
           </ul>
         </div>
 
-        <div class="comp-col reveal" style="transition-delay: .26s">
-          <div class="comp-col-header">
-            <span class="comp-col-num">iv.</span>
-            <span class="comp-col-name">Soft<br>Skills</span>
-          </div>
-          <ul class="comp-col-list">
+        <div class="comp-col reveal">
+          <div class="comp-col-num">iv.</div>
+          <h3 class="comp-col-title">Soft Skills</h3>
+          <ul class="comp-list">
             <li>Communication</li>
             <li>Adaptabilité</li>
             <li>Résilience</li>
@@ -785,73 +1408,72 @@
     </div>
   </section>
 
-  <section id="interets">
+  <!-- INTÉRÊTS -->
+  <section id="intérêts">
     <div class="section-inner">
-      <div class="ed-section-head reveal">
-        <div class="ed-section-num"><small>№</small>06</div>
-        <div class="ed-section-meta">
-          <div class="ed-section-label">Langues &amp; Centres d'intérêt</div>
-          <h2 class="ed-section-title">Au-delà du <em>professionnel</em>.</h2>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 06</div>
+        <div class="mag-section-title">
+          <p class="label">Langues &amp; Centres d'intérêt</p>
+          <h2>Hors <em>du bureau</em></h2>
         </div>
-      </div>
+      </header>
 
-      <div class="trio-grid reveal">
-
-        <div class="trio-cell">
-          <div class="trio-symbol">i.</div>
-          <h3 class="trio-title">Langues</h3>
-          <ul class="trio-list">
-            <li><strong>Français</strong> — Courant</li>
-            <li><strong>Anglais</strong> — Opérationnel</li>
+      <div class="interests-strip">
+        <div class="interest-cell reveal">
+          <div class="interest-marker">◆</div>
+          <h3 class="interest-title">Langues</h3>
+          <ul class="interest-items">
+            <li>Français — Courant</li>
+            <li>Anglais — Opérationnel</li>
           </ul>
         </div>
-
-        <div class="trio-cell">
-          <div class="trio-symbol">ii.</div>
-          <h3 class="trio-title">Centres d'intérêt</h3>
-          <ul class="trio-list">
-            <li>Sport &amp; <strong>Musculation</strong></li>
+        <div class="interest-cell reveal">
+          <div class="interest-marker">✦</div>
+          <h3 class="interest-title">Centres d'intérêt</h3>
+          <ul class="interest-items">
+            <li>Sport &amp; Musculation</li>
             <li>Développement personnel</li>
-            <li>Podcasts <strong>business</strong></li>
+            <li>Podcasts business</li>
           </ul>
         </div>
-
-        <div class="trio-cell">
-          <div class="trio-symbol">iii.</div>
-          <h3 class="trio-title">Veille</h3>
-          <ul class="trio-list">
-            <li>Stratégies d'<strong>acquisition</strong></li>
+        <div class="interest-cell reveal">
+          <div class="interest-marker">❋</div>
+          <h3 class="interest-title">Veille &amp; Inspiration</h3>
+          <ul class="interest-items">
+            <li>Stratégies d'acquisition</li>
             <li>Marques D2C &amp; e-commerce</li>
-            <li>Tendances <strong>marketing digital</strong></li>
+            <li>Tendances marketing</li>
           </ul>
         </div>
-
       </div>
     </div>
   </section>
 
-  <footer id="contact">
+  <!-- FOOTER -->
+  <footer>
     <div class="footer-inner reveal">
-      <span class="footer-kicker">Édition limitée · Disponible 2026</span>
-      <h1 class="footer-title">Une alternance,<br>un <em>projet</em>,<br>une opportunité ?</h1>
+      <p class="footer-label">Dernière page</p>
+      <h2 class="footer-title">Une alternance,<br><em>une histoire</em><br>à écrire.</h2>
       <p class="footer-deck">
-        Disponible pour une alternance à partir de 2026<br>
-        — rythme 3 jours entreprise / 2 jours école —
+        Disponible pour une alternance à partir de 2026 — 3 jours entreprise / 2 jours école.
       </p>
+
+      <div class="contact-rule"></div>
 
       <div class="contact-row">
         <a href="mailto:arsenemamy2004@gmail.com" class="contact-item">
-          <div class="contact-label">E-mail</div>
-          <div class="contact-value">arsenemamy2004@gmail.com</div>
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          arsenemamy2004@gmail.com
         </a>
         <a href="tel:+33757171296" class="contact-item">
-          <div class="contact-label">Téléphone</div>
-          <div class="contact-value">07 57 17 12 96</div>
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          07 57 17 12 96
         </a>
-        <div class="contact-item">
-          <div class="contact-label">Localisation</div>
-          <div class="contact-value">Orléans / Paris</div>
-        </div>
+        <span class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Orléans · Paris
+        </span>
       </div>
 
       <div class="social-row">
@@ -861,21 +1483,16 @@
         </a>
         <a href="mailto:arsenemamy2004@gmail.com" class="social-btn">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          Écrire un e-mail
+          Écrire
         </a>
       </div>
 
-      <p class="footer-copy">© 2026 Folio — Arsène Mamy · Édition limitée · Tous droits réservés</p>
+      <p class="footer-copy">© 2026 Arsène Mamy — Édition №01</p>
     </div>
   </footer>
 
   <script>
-    const hdr = document.getElementById('site-header');
-    window.addEventListener('scroll', () => {
-      hdr.classList.toggle('scrolled', window.scrollY > 30);
-    });
-
-    const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const els = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -883,7 +1500,7 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: .12 });
+    }, { threshold: .1 });
     els.forEach(el => io.observe(el));
   </script>
 </body>
